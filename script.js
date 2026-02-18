@@ -332,9 +332,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Observe elements for reveal
     const revealElements = document.querySelectorAll(
-        '.stat-item, .skill-card, .project-card, .contact-card, ' +
-        '.about-text-col, .about-tech-col, .detail-card, .section-header'
-    );
+    '.stat-item, .skill-card, .project-card, .contact-card, ' +
+    '.about-text-col, .about-tech-col, .detail-card, .section-header, ' +
+    '.dm-card, .dm-stats-row'
+);
 
     revealElements.forEach((el, index) => {
         el.classList.add('reveal');
