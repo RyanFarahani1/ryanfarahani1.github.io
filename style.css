@@ -1876,34 +1876,105 @@ img {
 }
 .dm-upload-btn:hover { background: rgba(37,99,235,0.25); border-color: rgba(37,99,235,0.5); }
 
-.dm-file-info {
-    display: flex; align-items: center; gap: 10px;
-    padding: 12px 14px;
-    background: rgba(34,197,94,0.08);
+/* ── Document list ─────────────────────────────────────────── */
+.dm-doc-list {
     border: 1px solid rgba(34,197,94,0.2);
     border-radius: var(--radius-md);
+    background: rgba(34,197,94,0.04);
+    overflow: hidden;
 }
-.dm-file-icon {
-    width: 36px; height: 36px;
-    background: rgba(34,197,94,0.1);
-    border-radius: 8px;
+.dm-doc-list-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 14px;
+    background: rgba(34,197,94,0.08);
+    border-bottom: 1px solid rgba(34,197,94,0.12);
+}
+.dm-doc-count-wrap { display: flex; align-items: center; gap: 8px; }
+.dm-doc-count-badge {
+    display: inline-block; padding: 2px 10px;
+    background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3);
+    border-radius: 20px; font-size: 0.72rem; font-weight: 700;
+    color: #4ade80; letter-spacing: 0.04em;
+}
+.dm-doc-count-label { font-size: 0.72rem; color: #94a3b8; }
+.dm-clear-all-btn {
+    display: flex; align-items: center; gap: 5px;
+    padding: 4px 10px; border-radius: 6px;
+    border: 1px solid rgba(239,68,68,0.2); background: rgba(239,68,68,0.08);
+    color: #f87171; font-size: 0.7rem; font-weight: 500;
+    cursor: pointer; transition: all 0.2s;
+}
+.dm-clear-all-btn:hover { background: rgba(239,68,68,0.15); border-color: rgba(239,68,68,0.35); }
+.dm-doc-items {
+    max-height: 180px; overflow-y: auto;
+    padding: 6px 8px;
+}
+.dm-doc-items::-webkit-scrollbar { width: 4px; }
+.dm-doc-items::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.2); border-radius: 2px; }
+.dm-doc-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 8px; border-radius: 6px;
+    transition: background 0.15s;
+}
+.dm-doc-item:hover { background: rgba(255,255,255,0.03); }
+.dm-doc-item-icon {
+    width: 30px; height: 30px; border-radius: 6px;
     display: flex; align-items: center; justify-content: center;
-    color: #4ade80; font-size: 1rem; flex-shrink: 0;
+    font-size: 0.8rem; flex-shrink: 0;
 }
-.dm-file-details { flex: 1; min-width: 0; }
-.dm-file-name {
-    display: block; font-size: 0.82rem; font-weight: 600;
+.dm-doc-item-icon.pdf   { background: rgba(239,68,68,0.12); color: #f87171; }
+.dm-doc-item-icon.image { background: rgba(139,92,246,0.12); color: #a78bfa; }
+.dm-doc-item-icon.csv,
+.dm-doc-item-icon.excel { background: rgba(34,197,94,0.12); color: #4ade80; }
+.dm-doc-item-icon.docx  { background: rgba(56,189,248,0.12); color: #38bdf8; }
+.dm-doc-item-icon.text  { background: rgba(148,163,184,0.12); color: #94a3b8; }
+.dm-doc-item-details { flex: 1; min-width: 0; }
+.dm-doc-item-name {
+    display: block; font-size: 0.78rem; font-weight: 600;
     color: #e2e8f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.dm-file-chunks { font-size: 0.72rem; color: #4ade80; font-weight: 500; }
-.dm-file-remove {
-    width: 28px; height: 28px; border-radius: 6px;
-    border: none; background: rgba(239,68,68,0.1);
-    color: #ef4444; cursor: pointer; font-size: 0.75rem;
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.2s; flex-shrink: 0;
+.dm-doc-item-meta {
+    font-size: 0.68rem; color: #64748b;
 }
-.dm-file-remove:hover { background: rgba(239,68,68,0.2); }
+.dm-doc-item-badge {
+    display: inline-block; padding: 1px 7px; border-radius: 10px;
+    font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.05em; margin-right: 4px;
+}
+.dm-doc-item-badge.pdf   { background: rgba(239,68,68,0.15); color: #fca5a5; }
+.dm-doc-item-badge.image { background: rgba(139,92,246,0.15); color: #c4b5fd; }
+.dm-doc-item-badge.csv   { background: rgba(34,197,94,0.15); color: #86efac; }
+.dm-doc-item-badge.excel { background: rgba(34,197,94,0.15); color: #86efac; }
+.dm-doc-item-badge.docx  { background: rgba(56,189,248,0.15); color: #7dd3fc; }
+.dm-doc-item-badge.text  { background: rgba(148,163,184,0.15); color: #cbd5e1; }
+.dm-doc-item-remove {
+    width: 24px; height: 24px; border-radius: 5px;
+    border: none; background: transparent;
+    color: #64748b; cursor: pointer; font-size: 0.7rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; flex-shrink: 0;
+}
+.dm-doc-item-remove:hover { background: rgba(239,68,68,0.15); color: #f87171; }
+.dm-doc-total {
+    padding: 6px 14px 8px;
+    border-top: 1px solid rgba(34,197,94,0.1);
+    font-size: 0.68rem; color: #4ade80; font-weight: 500;
+}
+.dm-max-reached {
+    padding: 10px 14px; border-radius: var(--radius-md);
+    background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2);
+    color: #fbbf24; font-size: 0.78rem;
+    display: flex; align-items: center; gap: 8px;
+}
+.dm-max-reached i { flex-shrink: 0; }
+
+/* upload zone compact mode (when docs are loaded) */
+.dm-upload-zone.compact {
+    padding: 14px 16px;
+}
+.dm-upload-zone.compact .dm-upload-icon { display: none; }
+.dm-upload-zone.compact .dm-upload-title { font-size: 0.82rem; margin-bottom: 2px; }
+.dm-upload-zone.compact .dm-upload-sub { font-size: 0.68rem; margin-bottom: 8px; }
 
 .dm-or {
     display: flex; align-items: center; gap: 10px;

@@ -601,29 +601,37 @@
           <span class="dm-status-text">No document loaded</span>
         </div>
 
+        <!-- Document list (shown when files are loaded) -->
+        <div class="dm-doc-list" id="dmDocList" style="display:none;">
+          <div class="dm-doc-list-header">
+            <div class="dm-doc-count-wrap">
+              <span class="dm-doc-count-badge" id="dmDocCount">0 / 5</span>
+              <span class="dm-doc-count-label">documents loaded</span>
+            </div>
+            <button class="dm-clear-all-btn" id="dmClearAll" title="Remove all documents">
+              <i class="fas fa-trash-alt"></i> Clear All
+            </button>
+          </div>
+          <div class="dm-doc-items" id="dmDocItems"></div>
+          <div class="dm-doc-total" id="dmDocTotal"></div>
+        </div>
+
         <!-- Upload zone -->
         <div class="dm-upload-zone" id="dmUploadZone">
           <input type="file" id="dmFileInput" accept=".pdf,.txt,.doc,.docx,.csv,.xlsx,.xls,.jpg,.jpeg,.png,.webp" multiple hidden>
           <div class="dm-upload-icon">
             <i class="fas fa-cloud-upload-alt"></i>
           </div>
-          <p class="dm-upload-title">Drop your files here</p>
-          <p class="dm-upload-sub">Up to 5 files &middot; PDF, TXT, DOCX, CSV, XLSX, JPG/PNG/WEBP</p>
+          <p class="dm-upload-title" id="dmUploadTitle">Drop your files here</p>
+          <p class="dm-upload-sub" id="dmUploadSub">Up to 5 files &middot; PDF, TXT, DOCX, CSV, XLSX, JPG/PNG/WEBP</p>
           <button class="dm-upload-btn">
             <i class="fas fa-folder-open"></i> Browse Files
           </button>
         </div>
-
-        <!-- File info (shown after upload) -->
-        <div class="dm-file-info" id="dmFileInfo" style="display:none;">
-          <div class="dm-file-icon"><i class="fas fa-file-alt"></i></div>
-          <div class="dm-file-details">
-            <span class="dm-file-name" id="dmFileName">documents</span>
-            <span class="dm-file-chunks" id="dmFileChunks">Indexing...</span>
-          </div>
-          <button class="dm-file-remove" id="dmFileRemove" title="Remove all documents">
-            <i class="fas fa-times"></i>
-          </button>
+        <!-- Max files reached message (hidden by default) -->
+        <div class="dm-max-reached" id="dmMaxReached" style="display:none;">
+          <i class="fas fa-exclamation-circle"></i>
+          Maximum 5 files reached. Remove a file to upload more.
         </div>
 
         <!-- OR divider -->
@@ -757,39 +765,63 @@
 <!-- ==================== DOCMIND JS ==================== -->
 <script>
 (function () {
-  // ── Config ────────────────────────────────────────────────────────────
+  var MAX_FILES  = 5;
   var SPACE_ROOT = 'https://ryanfafa-docmind-ai.hf.space';
 
-  // Candidate API URLs — tried in order during discovery.
-  // HF Docker Spaces only expose port 7860; FastAPI on 7861 needs a proxy.
   var API_CANDIDATES = [
-    SPACE_ROOT + '/api',                    // nginx reverse-proxy (if added)
-    SPACE_ROOT + '/_stcore/proxy/7861',     // newer Streamlit server proxy
-    SPACE_ROOT + '/proxy/7861',             // older Streamlit server proxy
-    SPACE_ROOT                              // fallback: direct (if Space is restructured)
+    SPACE_ROOT + '/api',
+    SPACE_ROOT + '/_stcore/proxy/7861',
+    SPACE_ROOT + '/proxy/7861',
+    SPACE_ROOT
   ];
 
-  var API_BASE = null; // resolved at upload / query time
+  var API_BASE = null;
 
   // ── State ─────────────────────────────────────────────────────────────
-  var documentLoaded = false;
-  var isThinking     = false;
+  var documents     = []; // [{name, file_type, chunks}]
+  var totalChunks   = 0;
+  var isThinking    = false;
+  var isUploading   = false;
 
   // ── Elements ──────────────────────────────────────────────────────────
-  var fileInput  = document.getElementById('dmFileInput');
-  var uploadZone = document.getElementById('dmUploadZone');
-  var fileInfo   = document.getElementById('dmFileInfo');
-  var fileName   = document.getElementById('dmFileName');
-  var fileChunks = document.getElementById('dmFileChunks');
-  var fileRemove = document.getElementById('dmFileRemove');
-  var statusDot  = document.querySelector('.dm-status-dot');
-  var statusText = document.querySelector('.dm-status-text');
-  var messages   = document.getElementById('dmMessages');
-  var input      = document.getElementById('dmInput');
-  var sendBtn    = document.getElementById('dmSendBtn');
-  var thinking   = document.getElementById('dmThinking');
-  var chatSub    = document.getElementById('dmChatSub');
-  var sampleBtns = document.querySelectorAll('.dm-sample-btn');
+  var fileInput    = document.getElementById('dmFileInput');
+  var uploadZone   = document.getElementById('dmUploadZone');
+  var uploadTitle  = document.getElementById('dmUploadTitle');
+  var uploadSub    = document.getElementById('dmUploadSub');
+  var maxReached   = document.getElementById('dmMaxReached');
+  var docList      = document.getElementById('dmDocList');
+  var docItems     = document.getElementById('dmDocItems');
+  var docCount     = document.getElementById('dmDocCount');
+  var docTotal     = document.getElementById('dmDocTotal');
+  var clearAllBtn  = document.getElementById('dmClearAll');
+  var statusDot    = document.querySelector('.dm-status-dot');
+  var statusText   = document.querySelector('.dm-status-text');
+  var messagesEl   = document.getElementById('dmMessages');
+  var input        = document.getElementById('dmInput');
+  var sendBtn      = document.getElementById('dmSendBtn');
+  var thinking     = document.getElementById('dmThinking');
+  var chatSub      = document.getElementById('dmChatSub');
+  var sampleBtns   = document.querySelectorAll('.dm-sample-btn');
+
+  // ── File type metadata ────────────────────────────────────────────────
+  var TYPE_MAP = {
+    '.pdf':  { cls: 'pdf',   icon: 'fa-file-pdf',   label: 'PDF' },
+    '.txt':  { cls: 'text',  icon: 'fa-file-alt',   label: 'TXT' },
+    '.docx': { cls: 'docx',  icon: 'fa-file-word',  label: 'DOCX' },
+    '.doc':  { cls: 'docx',  icon: 'fa-file-word',  label: 'DOC' },
+    '.csv':  { cls: 'csv',   icon: 'fa-file-csv',   label: 'CSV' },
+    '.xlsx': { cls: 'excel', icon: 'fa-file-excel', label: 'XLSX' },
+    '.xls':  { cls: 'excel', icon: 'fa-file-excel', label: 'XLS' },
+    '.jpg':  { cls: 'image', icon: 'fa-file-image', label: 'IMG' },
+    '.jpeg': { cls: 'image', icon: 'fa-file-image', label: 'IMG' },
+    '.png':  { cls: 'image', icon: 'fa-file-image', label: 'IMG' },
+    '.webp': { cls: 'image', icon: 'fa-file-image', label: 'IMG' }
+  };
+
+  function getTypeInfo(filename) {
+    var ext = (filename.match(/\.[^.]+$/) || [''])[0].toLowerCase();
+    return TYPE_MAP[ext] || { cls: 'text', icon: 'fa-file', label: ext.replace('.', '').toUpperCase() };
+  }
 
   // ── Helpers ───────────────────────────────────────────────────────────
   function setStatus(state, text) {
@@ -797,14 +829,16 @@
     statusText.textContent = text;
   }
 
+  function docLoaded() { return documents.length > 0; }
+
   function setThinking(active) {
     isThinking = active;
     thinking.classList.toggle('active', active);
-    sendBtn.disabled = active || !documentLoaded;
-    input.disabled   = active || !documentLoaded;
+    sendBtn.disabled = active || !docLoaded();
+    input.disabled   = active || !docLoaded();
     chatSub.textContent = active
       ? 'Thinking...'
-      : (documentLoaded ? 'Documents loaded \u00b7 Ask anything' : 'Ready to analyze your documents');
+      : (docLoaded() ? 'Documents loaded \u00b7 Ask anything' : 'Ready to analyze your documents');
   }
 
   function addMessage(role, content, sources) {
@@ -834,8 +868,8 @@
         '<div class="dm-msg-meta">' + authorLabel + ' \u00b7 ' + time + '</div>' +
       '</div>';
 
-    messages.appendChild(msgEl);
-    messages.scrollTop = messages.scrollHeight;
+    messagesEl.appendChild(msgEl);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
     return msgEl;
   }
 
@@ -845,17 +879,14 @@
     var controller = new AbortController();
     var t = setTimeout(function() { controller.abort(); }, timeoutMs);
     try {
-      var resp = await fetch(url, Object.assign({}, opts, { signal: controller.signal }));
-      return resp;
+      return await fetch(url, Object.assign({}, opts, { signal: controller.signal }));
     } finally {
       clearTimeout(t);
     }
   }
 
-  // Probe each candidate URL; the real FastAPI returns {"status":"ok",...}
   async function discoverApi() {
     if (API_BASE) return API_BASE;
-
     for (var i = 0; i < API_CANDIDATES.length; i++) {
       var base = API_CANDIDATES[i];
       try {
@@ -867,53 +898,175 @@
           console.log('[DocMind] API found at', base);
           return base;
         }
-      } catch (e) { /* try next */ }
+      } catch (e) { /* next */ }
     }
     return null;
   }
 
-  // ── Upload documents (up to 5, additive) ──────────────────────────────
-  async function uploadDocuments(fileList) {
-    if (!fileList || fileList.length === 0) return;
+  // ── Render document list ──────────────────────────────────────────────
+  function renderDocList() {
+    var count = documents.length;
 
-    var files = Array.prototype.slice.call(fileList, 0, 5);
+    if (count === 0) {
+      docList.style.display    = 'none';
+      uploadZone.style.display = 'block';
+      maxReached.style.display = 'none';
+      uploadZone.classList.remove('compact');
+      uploadTitle.textContent = 'Drop your files here';
+      uploadSub.textContent   = 'Up to 5 files \u00b7 PDF, TXT, DOCX, CSV, XLSX, JPG/PNG/WEBP';
+      setStatus('idle', 'No document loaded');
+      input.disabled    = true;
+      sendBtn.disabled  = true;
+      input.placeholder = 'Upload documents first, then ask anything...';
+      chatSub.textContent = 'Ready to analyze your documents';
+      sampleBtns.forEach(function(b) { b.disabled = true; });
+      return;
+    }
+
+    docList.style.display = 'block';
+    docCount.textContent  = count + ' / ' + MAX_FILES;
+    docTotal.textContent  = '\u2713 ' + totalChunks + ' total chunks indexed';
+
+    docItems.innerHTML = '';
+    documents.forEach(function(doc) {
+      var info = getTypeInfo(doc.name);
+      var item = document.createElement('div');
+      item.className = 'dm-doc-item';
+      item.innerHTML =
+        '<div class="dm-doc-item-icon ' + info.cls + '"><i class="fas ' + info.icon + '"></i></div>' +
+        '<div class="dm-doc-item-details">' +
+          '<span class="dm-doc-item-name" title="' + doc.name + '">' + doc.name + '</span>' +
+          '<span class="dm-doc-item-meta">' +
+            '<span class="dm-doc-item-badge ' + info.cls + '">' + info.label + '</span>' +
+            doc.chunks + ' chunks' +
+          '</span>' +
+        '</div>' +
+        '<button class="dm-doc-item-remove" title="Remove ' + doc.name + '">' +
+          '<i class="fas fa-times"></i>' +
+        '</button>';
+
+      var removeBtn = item.querySelector('.dm-doc-item-remove');
+      removeBtn.addEventListener('click', function() { removeDocument(doc.name); });
+
+      docItems.appendChild(item);
+    });
+
+    if (count >= MAX_FILES) {
+      uploadZone.style.display = 'none';
+      maxReached.style.display = 'flex';
+    } else {
+      uploadZone.style.display = 'block';
+      maxReached.style.display = 'none';
+      uploadZone.classList.add('compact');
+      var remaining = MAX_FILES - count;
+      uploadTitle.textContent = 'Add more files';
+      uploadSub.textContent   = remaining + ' slot' + (remaining > 1 ? 's' : '') + ' remaining \u00b7 Drop or browse';
+    }
+
+    setStatus('ready', count + ' document' + (count > 1 ? 's' : '') + ' ready');
+    input.disabled    = false;
+    sendBtn.disabled  = false;
+    input.placeholder = 'Ask anything about your documents...';
+    chatSub.textContent = 'Documents loaded \u00b7 Ask anything';
+    sampleBtns.forEach(function(b) { b.disabled = false; });
+  }
+
+  // ── Sync document list from API ───────────────────────────────────────
+  async function syncDocuments() {
+    if (!API_BASE) return;
+    try {
+      var resp = await fetchWithTimeout(API_BASE + '/documents', {}, 10000);
+      if (!resp.ok) return;
+      var data = await resp.json();
+      documents   = (data.documents || []).map(function(d) {
+        return { name: d.name, file_type: d.file_type, chunks: d.chunk_count };
+      });
+      totalChunks = data.total_chunks || 0;
+    } catch (e) { /* keep current state */ }
+  }
+
+  // ── Remove single document ────────────────────────────────────────────
+  async function removeDocument(filename) {
+    if (!API_BASE) return;
+    try {
+      var resp = await fetchWithTimeout(
+        API_BASE + '/documents/' + encodeURIComponent(filename),
+        { method: 'DELETE' },
+        15000
+      );
+      if (!resp.ok) {
+        addMessage('error', 'Failed to remove ' + filename + ' (HTTP ' + resp.status + ')');
+        return;
+      }
+      var data = await resp.json();
+      documents = documents.filter(function(d) { return d.name !== filename; });
+      totalChunks = data.total_chunks != null ? data.total_chunks : totalChunks;
+
+      renderDocList();
+      addMessage('ai', 'Removed <strong>' + filename + '</strong>.' +
+        (documents.length > 0
+          ? ' ' + documents.length + ' file(s) remaining.'
+          : ' Upload new files to continue.'));
+    } catch (err) {
+      addMessage('error', 'Error removing file: ' + err.message);
+    }
+  }
+
+  // ── Clear all documents ───────────────────────────────────────────────
+  async function clearAll() {
+    if (API_BASE) {
+      try { await fetchWithTimeout(API_BASE + '/reset', { method: 'POST' }, 20000); } catch (e) {}
+    }
+    documents   = [];
+    totalChunks = 0;
+    API_BASE    = null;
+    renderDocList();
+    addMessage('ai', 'All documents removed. Upload new files to continue.');
+  }
+
+  // ── Upload documents (additive) ───────────────────────────────────────
+  async function uploadDocuments(fileList) {
+    if (!fileList || fileList.length === 0 || isUploading) return;
+    isUploading = true;
+
+    var remaining = MAX_FILES - documents.length;
+    if (remaining <= 0) {
+      addMessage('error', 'Maximum ' + MAX_FILES + ' files reached. Remove a file to upload more.');
+      isUploading = false;
+      return;
+    }
+
+    var files = Array.prototype.slice.call(fileList, 0, remaining);
+    if (fileList.length > remaining) {
+      addMessage('ai', 'Only uploading ' + remaining + ' of ' + fileList.length +
+        ' files (limit is ' + MAX_FILES + ').');
+    }
 
     setStatus('loading', 'Connecting to API...');
-    uploadZone.style.display = 'none';
-    fileInfo.style.display   = 'flex';
-    fileName.textContent     = files.length === 1 ? files[0].name : files.length + ' files selected';
-    fileChunks.textContent   = 'Connecting...';
 
     var base = await discoverApi();
     if (!base) {
       setStatus('error', 'API unreachable');
-      fileChunks.textContent = '\u2717 API not responding';
       addMessage('error',
-        'Can\'t reach the DocMind API. The HuggingFace Space may be sleeping or the API port (7861) isn\'t externally accessible.' +
+        'Can\'t reach the DocMind API. The HuggingFace Space may be sleeping.' +
         '<br><br>' +
-        '<strong>To fix this</strong>, your HF Space needs an <strong>nginx reverse proxy</strong> to route <code>/api/</code> requests to FastAPI through port 7860.' +
-        '<br><br>' +
-        '1) <a href="https://huggingface.co/spaces/Ryanfafa/docmind-ai" target="_blank" style="color:#60a5fa;">Open the Space</a> to wake it up, then refresh this page.' +
-        '<br>' +
-        '2) If it still fails, the Space Dockerfile needs updating \u2014 see the README for instructions.'
+        '<a href="https://huggingface.co/spaces/Ryanfafa/docmind-ai" target="_blank" style="color:#60a5fa;">Open the Space</a> to wake it up, then refresh this page.'
       );
-      uploadZone.style.display = 'block';
-      fileInfo.style.display   = 'none';
+      renderDocList();
+      isUploading = false;
       return;
     }
 
     setStatus('loading', 'Uploading & indexing...');
-    fileChunks.textContent = 'Indexing...';
 
-    var totalAddedChunks = 0;
-    var loadedCount      = 0;
-    var totalChunksAll   = 0;
+    var uploaded   = 0;
+    var failedList = [];
 
-    try {
-      for (var i = 0; i < files.length; i++) {
-        var file = files[i];
-        fileChunks.textContent = 'Uploading ' + (i + 1) + '/' + files.length + ': ' + file.name;
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      setStatus('loading', 'Uploading ' + (i + 1) + '/' + files.length + ': ' + file.name);
 
+      try {
         var formData = new FormData();
         formData.append('file', file);
 
@@ -923,52 +1076,50 @@
         }, 120000);
 
         if (!resp.ok) {
-          var detail = 'Upload failed (HTTP ' + resp.status + ')';
+          var detail = 'HTTP ' + resp.status;
           try {
-            var respText = await resp.text();
-            try {
-              var errData = JSON.parse(respText);
-              detail = errData.detail || detail;
-            } catch (e2) {
-              if (respText && respText.length < 300) detail = respText;
+            var rt = await resp.text();
+            try { detail = JSON.parse(rt).detail || detail; } catch (e2) {
+              if (rt && rt.length < 300) detail = rt;
             }
           } catch (e) {}
-          throw new Error(file.name + ': ' + detail);
+          failedList.push(file.name + ': ' + detail);
+          continue;
         }
 
         var data = await resp.json();
-        totalAddedChunks += (data.chunks || 0);
-        loadedCount    = data.file_count   != null ? data.file_count   : loadedCount;
-        totalChunksAll = data.total_chunks != null ? data.total_chunks : totalChunksAll;
+        documents.push({
+          name: data.filename || file.name,
+          file_type: data.file_type || '',
+          chunks: data.chunks || 0
+        });
+        totalChunks = data.total_chunks != null ? data.total_chunks : totalChunks;
+        uploaded++;
+
+      } catch (err) {
+        failedList.push(file.name + ': ' + err.message);
       }
-
-      fileChunks.textContent = '\u2713 Loaded ' + loadedCount + ' file(s) \u00b7 ' + totalChunksAll + ' total chunks';
-      setStatus('ready', 'Documents ready');
-      documentLoaded = true;
-
-      input.disabled      = false;
-      sendBtn.disabled    = false;
-      input.placeholder   = 'Ask anything about your documents...';
-      chatSub.textContent = 'Documents loaded \u00b7 Ask anything';
-      sampleBtns.forEach(function(b) { b.disabled = false; });
-
-      addMessage('ai',
-        '\u2705 Indexed <strong>' + files.length + ' file(s)</strong> (+<strong>' + totalAddedChunks + '</strong> chunks).' +
-        '<br>Now ask me anything about your documents.'
-      );
-
-    } catch (err) {
-      setStatus('error', 'Upload failed');
-      fileChunks.textContent = '\u2717 Failed to upload';
-      addMessage('error', 'Failed to upload: ' + err.message);
-      uploadZone.style.display = 'block';
-      fileInfo.style.display   = 'none';
     }
+
+    if (uploaded > 0) {
+      addMessage('ai',
+        '\u2705 Indexed <strong>' + uploaded + ' file(s)</strong>.' +
+        '<br>Now ask me anything about your documents.');
+    }
+    if (failedList.length > 0) {
+      addMessage('error',
+        'Failed to upload:<br>' +
+        failedList.map(function(f) { return '\u2022 ' + f; }).join('<br>'));
+    }
+
+    renderDocList();
+    fileInput.value = '';
+    isUploading = false;
   }
 
   // ── Send query ────────────────────────────────────────────────────────
   async function sendQuery(question) {
-    if (!question.trim() || isThinking || !documentLoaded) return;
+    if (!question.trim() || isThinking || !docLoaded()) return;
 
     addMessage('user', question);
     input.value        = '';
@@ -1013,7 +1164,6 @@
   }
 
   // ── Event listeners ───────────────────────────────────────────────────
-
   fileInput.addEventListener('change', function() {
     if (fileInput.files && fileInput.files.length) uploadDocuments(fileInput.files);
   });
@@ -1030,27 +1180,10 @@
   uploadZone.addEventListener('drop', function(e) {
     e.preventDefault();
     uploadZone.classList.remove('dragover');
-    var files = e.dataTransfer.files;
-    if (files && files.length) uploadDocuments(files);
+    if (e.dataTransfer.files && e.dataTransfer.files.length) uploadDocuments(e.dataTransfer.files);
   });
 
-  fileRemove.addEventListener('click', async function() {
-    if (API_BASE) {
-      try { await fetchWithTimeout(API_BASE + '/reset', { method: 'POST' }, 20000); } catch (e) {}
-    }
-
-    documentLoaded = false;
-    API_BASE = null;
-    fileInfo.style.display   = 'none';
-    uploadZone.style.display = 'block';
-    input.disabled           = true;
-    sendBtn.disabled         = true;
-    input.placeholder        = 'Upload documents first, then ask anything...';
-    setStatus('idle', 'No document loaded');
-    chatSub.textContent = 'Ready to analyze your documents';
-    sampleBtns.forEach(function(b) { b.disabled = true; });
-    addMessage('ai', 'Documents removed. Upload new files to continue.');
-  });
+  clearAllBtn.addEventListener('click', function() { clearAll(); });
 
   sendBtn.addEventListener('click', function() { sendQuery(input.value); });
 
@@ -1070,12 +1203,15 @@
     btn.disabled = true;
     btn.addEventListener('click', function() {
       var q = btn.getAttribute('data-q');
-      if (q && documentLoaded && !isThinking) {
+      if (q && docLoaded() && !isThinking) {
         input.value = q;
         sendQuery(q);
       }
     });
   });
+
+  // ── Init ──────────────────────────────────────────────────────────────
+  renderDocList();
 
 })();
 </script>
