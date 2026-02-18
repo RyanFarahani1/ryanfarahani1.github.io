@@ -6,6 +6,14 @@
     <title>Ryan Farahani — Data Analyst & AI Engineer</title>
     <meta name="description" content="Data Analyst & AI Engineer specializing in Python, SQL, Power BI, and Machine Learning. Based in Sydney, Australia.">
 
+    <!-- Prevent theme flash -->
+    <script>
+      (() => {
+        const saved = localStorage.getItem('theme');
+        if (saved) document.documentElement.setAttribute('data-theme', saved);
+      })();
+    </script>
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,7 +52,7 @@
                 <i class="fas fa-moon"></i>
                 <i class="fas fa-sun"></i>
             </button>
-            <a href="resume.pdf" class="nav-resume-btn" target="_blank">Resume</a>
+            <a href="resume.pdf" class="nav-resume-btn" target="_blank" rel="noopener noreferrer">Resume</a>
             <div class="hamburger" id="hamburger">
                 <span></span><span></span><span></span>
             </div>
@@ -77,8 +85,8 @@
                 <span class="typed-cursor">|</span>
             </div>
             <p class="hero-description">
-                Transforming raw data into actionable insights and intelligent solutions. 
-                I bridge the gap between data analysis and AI engineering to solve 
+                Transforming raw data into actionable insights and intelligent solutions.
+                I bridge the gap between data analysis and AI engineering to solve
                 real-world business challenges.
             </p>
             <div class="hero-buttons">
@@ -92,10 +100,10 @@
                 </a>
             </div>
             <div class="hero-social">
-                <a href="https://linkedin.com/in/ryan-farahanii" target="_blank" aria-label="LinkedIn" class="social-link">
+                <a href="https://linkedin.com/in/ryan-farahanii" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-link">
                     <i class="fab fa-linkedin-in"></i>
                 </a>
-                <a href="https://github.com/ryanfarahani1" target="_blank" aria-label="GitHub" class="social-link">
+                <a href="https://github.com/ryanfarahani1" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-link">
                     <i class="fab fa-github"></i>
                 </a>
                 <a href="mailto:Ryan.farahani97@gmail.com" aria-label="Email" class="social-link">
@@ -167,17 +175,17 @@
             <div class="about-text-col">
                 <div class="about-text">
                     <p class="about-lead">
-                        I'm a <strong>Data Analyst</strong> and <strong>AI Engineer</strong> based in 
+                        I'm a <strong>Data Analyst</strong> and <strong>AI Engineer</strong> based in
                         Sydney, Australia, with a Master's in IT specializing in Artificial Intelligence.
                     </p>
                     <p>
-                        I specialize in extracting insights from complex datasets, building interactive 
-                        dashboards, writing optimized SQL queries, and deploying AI/ML models that 
+                        I specialize in extracting insights from complex datasets, building interactive
+                        dashboards, writing optimized SQL queries, and deploying AI/ML models that
                         solve real business problems.
                     </p>
                     <p>
-                        I enjoy working with cross-functional teams to translate data into business 
-                        strategies that drive measurable results. My approach combines analytical 
+                        I enjoy working with cross-functional teams to translate data into business
+                        strategies that drive measurable results. My approach combines analytical
                         rigor with creative problem-solving.
                     </p>
                 </div>
@@ -210,7 +218,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="resume.pdf" class="btn btn-primary" target="_blank">
+                <a href="resume.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
                     <i class="fas fa-download"></i>
                     <span>Download Resume</span>
                 </a>
@@ -360,13 +368,13 @@
             <!-- PROJECT 1: Python -->
             <div class="project-card" data-category="python">
                 <div class="project-image">
-                    <img src="images/domain.jpg" alt="Sales Analysis">
+                    <img src="images/domain.jpg" alt="Sales Analysis" loading="lazy" decoding="async">
                     <div class="project-overlay">
                         <div class="overlay-content">
-                            <a href="https://your-streamlit-app.streamlit.app" target="_blank" class="overlay-btn primary">
+                            <a href="https://your-streamlit-app.streamlit.app" target="_blank" rel="noopener noreferrer" class="overlay-btn primary">
                                 <i class="fas fa-external-link-alt"></i> Live Demo
                             </a>
-                            <a href="https://github.com/RyanFarahani1/real-estate-ml-predictions" target="_blank" class="overlay-btn">
+                            <a href="https://github.com/RyanFarahani1/real-estate-ml-predictions" target="_blank" rel="noopener noreferrer" class="overlay-btn">
                                 <i class="fab fa-github"></i> Source Code
                             </a>
                         </div>
@@ -383,8 +391,8 @@
                         <span>Prophet</span>
                     </div>
                     <div class="project-links-mobile">
-                        <a href="https://your-streamlit-app.streamlit.app" target="_blank"><i class="fas fa-external-link-alt"></i> Demo</a>
-                        <a href="https://github.com/ryanfarahani1/project1" target="_blank"><i class="fab fa-github"></i> Code</a>
+                        <a href="https://your-streamlit-app.streamlit.app" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Demo</a>
+                        <a href="https://github.com/ryanfarahani1/project1" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Code</a>
                     </div>
                 </div>
             </div>
@@ -392,10 +400,10 @@
             <!-- PROJECT 2: SQL -->
             <div class="project-card" data-category="sql">
                 <div class="project-image">
-                    <img src="https://via.placeholder.com/600x400/059669/ffffff?text=SQL+Analysis" alt="SQL Analysis">
+                    <img src="https://via.placeholder.com/600x400/059669/ffffff?text=SQL+Analysis" alt="SQL Analysis" loading="lazy" decoding="async">
                     <div class="project-overlay">
                         <div class="overlay-content">
-                            <a href="https://github.com/ryanfarahani1/project2" target="_blank" class="overlay-btn primary">
+                            <a href="https://github.com/ryanfarahani1/project2" target="_blank" rel="noopener noreferrer" class="overlay-btn primary">
                                 <i class="fab fa-github"></i> View Case Study
                             </a>
                         </div>
@@ -411,7 +419,7 @@
                         <span>Window Functions</span>
                     </div>
                     <div class="project-links-mobile">
-                        <a href="https://github.com/ryanfarahani1/project2" target="_blank"><i class="fab fa-github"></i> Case Study</a>
+                        <a href="https://github.com/ryanfarahani1/project2" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Case Study</a>
                     </div>
                 </div>
             </div>
@@ -419,10 +427,10 @@
             <!-- PROJECT 3: Power BI -->
             <div class="project-card" data-category="powerbi">
                 <div class="project-image">
-                    <img src="https://via.placeholder.com/600x400/d97706/ffffff?text=Power+BI" alt="Power BI Dashboard">
+                    <img src="https://via.placeholder.com/600x400/d97706/ffffff?text=Power+BI" alt="Power BI Dashboard" loading="lazy" decoding="async">
                     <div class="project-overlay">
                         <div class="overlay-content">
-                            <a href="https://app.powerbi.com/view?r=YOUR_EMBED" target="_blank" class="overlay-btn primary">
+                            <a href="https://app.powerbi.com/view?r=YOUR_EMBED" target="_blank" rel="noopener noreferrer" class="overlay-btn primary">
                                 <i class="fas fa-external-link-alt"></i> Live Dashboard
                             </a>
                         </div>
@@ -438,7 +446,7 @@
                         <span>Power Query</span>
                     </div>
                     <div class="project-links-mobile">
-                        <a href="https://app.powerbi.com/view?r=YOUR_EMBED" target="_blank"><i class="fas fa-external-link-alt"></i> Dashboard</a>
+                        <a href="https://app.powerbi.com/view?r=YOUR_EMBED" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Dashboard</a>
                     </div>
                 </div>
             </div>
@@ -446,13 +454,13 @@
             <!-- PROJECT 4: AI/ML -->
             <div class="project-card" data-category="ai">
                 <div class="project-image">
-                    <img src="https://via.placeholder.com/600x400/7c3aed/ffffff?text=Sentiment+AI" alt="AI Project">
+                    <img src="https://via.placeholder.com/600x400/7c3aed/ffffff?text=Sentiment+AI" alt="AI Project" loading="lazy" decoding="async">
                     <div class="project-overlay">
                         <div class="overlay-content">
-                            <a href="https://huggingface.co/spaces/ryanfarahani1/project" target="_blank" class="overlay-btn primary">
+                            <a href="https://huggingface.co/spaces/ryanfarahani1/project" target="_blank" rel="noopener noreferrer" class="overlay-btn primary">
                                 <i class="fas fa-external-link-alt"></i> Live Demo
                             </a>
-                            <a href="https://github.com/ryanfarahani1/project4" target="_blank" class="overlay-btn">
+                            <a href="https://github.com/ryanfarahani1/project4" target="_blank" rel="noopener noreferrer" class="overlay-btn">
                                 <i class="fab fa-github"></i> Source Code
                             </a>
                         </div>
@@ -468,8 +476,8 @@
                         <span>Gradio</span>
                     </div>
                     <div class="project-links-mobile">
-                        <a href="https://huggingface.co/spaces/ryanfarahani1/project" target="_blank"><i class="fas fa-external-link-alt"></i> Demo</a>
-                        <a href="https://github.com/ryanfarahani1/project4" target="_blank"><i class="fab fa-github"></i> Code</a>
+                        <a href="https://huggingface.co/spaces/ryanfarahani1/project" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Demo</a>
+                        <a href="https://github.com/ryanfarahani1/project4" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Code</a>
                     </div>
                 </div>
             </div>
@@ -477,10 +485,10 @@
             <!-- PROJECT 5: Python -->
             <div class="project-card" data-category="python">
                 <div class="project-image">
-                    <img src="https://via.placeholder.com/600x400/2563eb/ffffff?text=EDA+Project" alt="EDA Project">
+                    <img src="https://via.placeholder.com/600x400/2563eb/ffffff?text=EDA+Project" alt="EDA Project" loading="lazy" decoding="async">
                     <div class="project-overlay">
                         <div class="overlay-content">
-                            <a href="https://github.com/ryanfarahani1/project5" target="_blank" class="overlay-btn primary">
+                            <a href="https://github.com/ryanfarahani1/project5" target="_blank" rel="noopener noreferrer" class="overlay-btn primary">
                                 <i class="fab fa-github"></i> View Notebook
                             </a>
                         </div>
@@ -496,7 +504,7 @@
                         <span>Seaborn</span>
                     </div>
                     <div class="project-links-mobile">
-                        <a href="https://github.com/ryanfarahani1/project5" target="_blank"><i class="fab fa-github"></i> Notebook</a>
+                        <a href="https://github.com/ryanfarahani1/project5" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Notebook</a>
                     </div>
                 </div>
             </div>
@@ -504,13 +512,13 @@
             <!-- PROJECT 6: AI -->
             <div class="project-card" data-category="ai">
                 <div class="project-image">
-                    <img src="https://via.placeholder.com/600x400/7c3aed/ffffff?text=RAG+Chatbot" alt="RAG Chatbot">
+                    <img src="https://via.placeholder.com/600x400/7c3aed/ffffff?text=RAG+Chatbot" alt="RAG Chatbot" loading="lazy" decoding="async">
                     <div class="project-overlay">
                         <div class="overlay-content">
-                            <a href="https://your-app.streamlit.app" target="_blank" class="overlay-btn primary">
+                            <a href="https://your-app.streamlit.app" target="_blank" rel="noopener noreferrer" class="overlay-btn primary">
                                 <i class="fas fa-external-link-alt"></i> Live Demo
                             </a>
-                            <a href="https://github.com/ryanfarahani1/project6" target="_blank" class="overlay-btn">
+                            <a href="https://github.com/ryanfarahani1/project6" target="_blank" rel="noopener noreferrer" class="overlay-btn">
                                 <i class="fab fa-github"></i> Source Code
                             </a>
                         </div>
@@ -527,8 +535,8 @@
                         <span>Streamlit</span>
                     </div>
                     <div class="project-links-mobile">
-                        <a href="https://your-app.streamlit.app" target="_blank"><i class="fas fa-external-link-alt"></i> Demo</a>
-                        <a href="https://github.com/ryanfarahani1/project6" target="_blank"><i class="fab fa-github"></i> Code</a>
+                        <a href="https://your-app.streamlit.app" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Demo</a>
+                        <a href="https://github.com/ryanfarahani1/project6" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Code</a>
                     </div>
                 </div>
             </div>
@@ -536,14 +544,15 @@
         </div>
     </div>
 </section>
-  <!-- Demo 7: AI -->
+
+<!-- Demo 7: AI -->
 <section id="image-captioning" class="projects">
     <div class="container">
         <div class="section-header">
             <span class="section-tag"><i class="fas fa-image"></i> Live AI Demo</span>
             <h2 class="section-title">Image Captioning Model</h2>
             <p class="section-subtitle">
-                Upload an image and see the caption generated by my EfficientNet‑B0 + GPT‑2 model
+                Upload an image and see the caption generated by my EfficientNet-B0 + GPT-2 model
                 deployed on Hugging Face Spaces.
             </p>
         </div>
@@ -583,8 +592,8 @@
       <span class="section-tag light"><i class="fas fa-brain"></i> Live AI Demo</span>
       <h2 class="section-title light">DocMind AI</h2>
       <p class="section-subtitle">
-        Upload a PDF or TXT and have a real conversation with your document —
-        powered by RAG, ChromaDB, and Mistral-7B. Running live on Hugging Face.
+        Upload up to <strong>5 files</strong> (PDF, TXT, DOC/DOCX, CSV, XLS/XLSX, JPG/PNG/WEBP)
+        and chat with them — powered by RAG, ChromaDB, and Mistral-7B. Running live on Hugging Face.
       </p>
     </div>
 
@@ -597,32 +606,46 @@
         <!-- Status indicator -->
         <div class="dm-status" id="dmStatus">
           <span class="dm-status-dot idle"></span>
-          <span class="dm-status-text">No document loaded</span>
+          <span class="dm-status-text">No documents loaded</span>
         </div>
 
-        <!-- Upload zone -->
+        <!-- Upload zone (stays visible even after loading docs) -->
         <div class="dm-upload-zone" id="dmUploadZone">
-          <input type="file" id="dmFileInput" accept=".pdf,.txt,.doc,.docx,.csv,.xls,.xlsx,.jpg,.jpeg,.png,.webp" multiple hidden/>
+          <input
+            type="file"
+            id="dmFileInput"
+            accept=".pdf,.txt,.doc,.docx,.csv,.xls,.xlsx,.jpg,.jpeg,.png,.webp"
+            multiple
+            hidden
+          >
           <div class="dm-upload-icon">
             <i class="fas fa-cloud-upload-alt"></i>
           </div>
-          <p class="dm-upload-title">Drop your document here</p>
-          <p class="dm-upload-sub">PDF or TXT · Max 10MB</p>
-          <button class="dm-upload-btn" onclick="document.getElementById('dmFileInput').click()">
+          <p class="dm-upload-title">Drop files here</p>
+          <p class="dm-upload-sub">Up to 5 files · Max 10MB each</p>
+          <button class="dm-upload-btn" type="button" onclick="document.getElementById('dmFileInput').click()">
             <i class="fas fa-folder-open"></i> Browse Files
           </button>
         </div>
 
-        <!-- File info (shown after upload) -->
-        <div class="dm-file-info" id="dmFileInfo" style="display:none;">
-          <div class="dm-file-icon"><i class="fas fa-file-alt"></i></div>
-          <div class="dm-file-details">
-            <span class="dm-file-name" id="dmFileName">document.pdf</span>
-            <span class="dm-file-chunks" id="dmFileChunks">Indexing...</span>
+        <!-- Loaded docs panel -->
+        <div id="dmFilesPanel" style="display:none;">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;">
+            <div style="font-size:0.78rem;font-weight:700;color:#e2e8f0;">Loaded files</div>
+            <button class="dm-upload-btn" id="dmClearAllBtn" type="button" title="Clear all documents and memory">
+              <i class="fas fa-trash"></i> Clear all
+            </button>
           </div>
-          <button class="dm-file-remove" id="dmFileRemove" title="Remove document">
-            <i class="fas fa-times"></i>
-          </button>
+
+          <div id="dmFileList" style="display:flex;flex-direction:column;gap:10px;margin-top:10px;"></div>
+
+          <div id="dmFilesMeta" style="margin-top:10px;font-size:0.72rem;color:#475569;font-weight:600;"></div>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;">
+            <button class="dm-upload-btn" id="dmClearMemoryBtn" type="button" title="Clear conversation history only">
+              <i class="fas fa-eraser"></i> Clear chat memory
+            </button>
+          </div>
         </div>
 
         <!-- OR divider -->
@@ -632,10 +655,10 @@
 
         <!-- Sample questions -->
         <div class="dm-samples">
-          <button class="dm-sample-btn" data-q="What are the main topics covered in this document?">
+          <button class="dm-sample-btn" data-q="What are the main topics covered across these documents?">
             <i class="fas fa-list"></i> Main topics
           </button>
-          <button class="dm-sample-btn" data-q="Summarize the key findings or conclusions.">
+          <button class="dm-sample-btn" data-q="Summarize the key findings or conclusions across the documents.">
             <i class="fas fa-compress-alt"></i> Summarize
           </button>
           <button class="dm-sample-btn" data-q="What recommendations are made?">
@@ -659,7 +682,7 @@
         </div>
 
         <!-- External link -->
-        <a href="https://huggingface.co/spaces/Ryanfafa/docmind-ai" target="_blank" class="dm-external-link">
+        <a href="https://huggingface.co/spaces/Ryanfafa/docmind-ai" target="_blank" rel="noopener noreferrer" class="dm-external-link">
           <i class="fas fa-external-link-alt"></i>
           Open full app on HuggingFace
         </a>
@@ -676,7 +699,7 @@
           </div>
           <div>
             <div class="dm-chat-name">DocMind AI</div>
-            <div class="dm-chat-sub" id="dmChatSub">Ready to analyze your document</div>
+            <div class="dm-chat-sub" id="dmChatSub">Upload files to begin</div>
           </div>
           <div class="dm-thinking" id="dmThinking">
             <span></span><span></span><span></span>
@@ -684,22 +707,7 @@
         </div>
 
         <!-- Messages -->
-        <div class="dm-messages" id="dmMessages">
-
-          <!-- Welcome message -->
-          <div class="dm-msg dm-msg-ai">
-            <div class="dm-msg-avatar"><i class="fas fa-brain"></i></div>
-            <div class="dm-msg-content">
-              <div class="dm-msg-bubble">
-                👋 Hi! I'm <strong>DocMind AI</strong> — a RAG-powered assistant built by Ryan.<br><br>
-                Upload a <strong>PDF or TXT</strong> document on the left, then ask me anything about it.
-                I'll retrieve the most relevant sections and give you accurate, grounded answers.
-              </div>
-              <div class="dm-msg-meta">DocMind AI · Just now</div>
-            </div>
-          </div>
-
-        </div>
+        <div class="dm-messages" id="dmMessages"></div>
 
         <!-- Input area -->
         <div class="dm-input-area">
@@ -707,7 +715,7 @@
             <textarea
               id="dmInput"
               class="dm-input"
-              placeholder="Upload a document first, then ask anything..."
+              placeholder="Upload files first, then ask anything..."
               rows="1"
               disabled
             ></textarea>
@@ -716,7 +724,7 @@
             </button>
           </div>
           <div class="dm-input-hint">
-            <i class="fas fa-shield-alt"></i> Answers are grounded in your document only — no hallucinations
+            <i class="fas fa-shield-alt"></i> Answers use retrieval across your uploaded files
           </div>
         </div>
 
@@ -755,36 +763,64 @@
   </div>
 </section>
 
-
 <!-- ==================== DOCMIND JS ==================== -->
 <script>
-(function() {
-  // ── Config ────────────────────────────────────────────────────────────
-  // Replace this with your actual HuggingFace Space API URL after deployment
-  const API_BASE = 'https://ryanfafa-docmind-ai.hf.space';
-  // If you deploy the FastAPI on port 7861, the URL will be:
-  // const API_BASE = 'https://ryanfafa-docmind-ai-api.hf.space';
-  // HuggingFace exposes additional ports as separate spaces, so check your space URL
+(async function() {
+  // ── API base auto-detect ──────────────────────────────────────────────
+  // Your FastAPI runs on port 7861. HF often exposes it via a "-api" subdomain.
+  const API_BASE_CANDIDATES = [
+    'https://ryanfafa-docmind-ai-api.hf.space',
+    'https://ryanfafa-docmind-ai.hf.space',
+  ];
+
+  let API_BASE = API_BASE_CANDIDATES[0];
+
+  async function resolveApiBase() {
+    for (const base of API_BASE_CANDIDATES) {
+      try {
+        const r = await fetch(base + '/health', { cache: 'no-store' });
+        if (r.ok) {
+          API_BASE = base;
+          return;
+        }
+      } catch {}
+    }
+  }
+
+  await resolveApiBase();
+
+  // ── Limits (match your HF backend expectations) ───────────────────────
+  const MAX_FILES = 5;
+  const MAX_MB = 10;
+  const MAX_BYTES = MAX_MB * 1024 * 1024;
+
+  const SUPPORTED_EXT = new Set([
+    '.pdf','.txt','.doc','.docx','.csv','.xls','.xlsx','.jpg','.jpeg','.png','.webp'
+  ]);
 
   // ── State ─────────────────────────────────────────────────────────────
   let documentLoaded = false;
   let isThinking = false;
 
   // ── Elements ──────────────────────────────────────────────────────────
-  const fileInput     = document.getElementById('dmFileInput');
-  const uploadZone    = document.getElementById('dmUploadZone');
-  const fileInfo      = document.getElementById('dmFileInfo');
-  const fileName      = document.getElementById('dmFileName');
-  const fileChunks    = document.getElementById('dmFileChunks');
-  const fileRemove    = document.getElementById('dmFileRemove');
-  const statusDot     = document.querySelector('.dm-status-dot');
-  const statusText    = document.querySelector('.dm-status-text');
-  const messages      = document.getElementById('dmMessages');
-  const input         = document.getElementById('dmInput');
-  const sendBtn       = document.getElementById('dmSendBtn');
-  const thinking      = document.getElementById('dmThinking');
-  const chatSub       = document.getElementById('dmChatSub');
-  const sampleBtns    = document.querySelectorAll('.dm-sample-btn');
+  const fileInput      = document.getElementById('dmFileInput');
+  const uploadZone     = document.getElementById('dmUploadZone');
+
+  const statusDot      = document.querySelector('.dm-status-dot');
+  const statusText     = document.querySelector('.dm-status-text');
+
+  const filesPanel     = document.getElementById('dmFilesPanel');
+  const fileListEl     = document.getElementById('dmFileList');
+  const filesMeta      = document.getElementById('dmFilesMeta');
+  const clearAllBtn    = document.getElementById('dmClearAllBtn');
+  const clearMemoryBtn = document.getElementById('dmClearMemoryBtn');
+
+  const messages       = document.getElementById('dmMessages');
+  const input          = document.getElementById('dmInput');
+  const sendBtn        = document.getElementById('dmSendBtn');
+  const thinking       = document.getElementById('dmThinking');
+  const chatSub        = document.getElementById('dmChatSub');
+  const sampleBtns     = document.querySelectorAll('.dm-sample-btn');
 
   // ── Status helpers ────────────────────────────────────────────────────
   function setStatus(state, text) {
@@ -797,11 +833,25 @@
     thinking.classList.toggle('active', active);
     sendBtn.disabled = active || !documentLoaded;
     input.disabled = active || !documentLoaded;
-    chatSub.textContent = active ? 'Thinking...' : (documentLoaded ? 'Document loaded · Ask anything' : 'Ready to analyze your document');
+    chatSub.textContent = active
+      ? 'Thinking...'
+      : (documentLoaded ? 'Documents loaded · Ask anything' : 'Upload files to begin');
   }
 
-  // ── Add message ───────────────────────────────────────────────────────
-  function addMessage(role, content, sources = []) {
+  function setDocLoaded(loaded) {
+    documentLoaded = loaded;
+    input.disabled = !loaded || isThinking;
+    sendBtn.disabled = !loaded || isThinking;
+    sampleBtns.forEach(b => b.disabled = !loaded || isThinking);
+    input.placeholder = loaded
+      ? 'Ask anything about your uploaded files...'
+      : 'Upload files first, then ask anything...';
+    chatSub.textContent = loaded ? 'Documents loaded · Ask anything' : 'Upload files to begin';
+  }
+
+  // ── Safe message builder (prevents XSS) ────────────────────────────────
+  function addMessage(role, content, sources = [], opts = {}) {
+    const { trustedHtml = false } = opts;
     const isAI = role === 'ai';
     const isError = role === 'error';
     const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -809,78 +859,228 @@
     const msgEl = document.createElement('div');
     msgEl.className = 'dm-msg dm-msg-' + (isAI || isError ? 'ai' : 'user') + (isError ? ' dm-msg-error' : '');
 
-    const avatarIcon = isAI || isError ? 'fa-brain' : 'fa-user';
-    const authorLabel = isAI ? 'DocMind AI' : isError ? 'Error' : 'You';
+    const avatar = document.createElement('div');
+    avatar.className = 'dm-msg-avatar';
 
-    let sourcesHTML = '';
-    if (sources.length > 0) {
-      sourcesHTML = '<div class="dm-sources">' +
-        sources.map(s => `<span class="dm-source-pill"><i class="fas fa-file-alt"></i>${s}</span>`).join('') +
-        '</div>';
+    if (isAI || isError) {
+      avatar.innerHTML = '<i class="fas fa-brain"></i>';
+    } else {
+      // keep your existing CSS pseudo-icon behavior
+      avatar.innerHTML = '';
     }
 
-    msgEl.innerHTML = `
-      <div class="dm-msg-avatar"><i class="fas ${avatarIcon}"></i></div>
-      <div class="dm-msg-content">
-        <div class="dm-msg-bubble">${content}</div>
-        ${sourcesHTML}
-        <div class="dm-msg-meta">${authorLabel} · ${time}</div>
-      </div>
-    `;
+    const contentWrap = document.createElement('div');
+    contentWrap.className = 'dm-msg-content';
 
+    const bubble = document.createElement('div');
+    bubble.className = 'dm-msg-bubble';
+
+    if (trustedHtml) bubble.innerHTML = content;
+    else bubble.textContent = content;
+
+    contentWrap.appendChild(bubble);
+
+    if (sources && sources.length) {
+      const sourcesWrap = document.createElement('div');
+      sourcesWrap.className = 'dm-sources';
+      sources.forEach(s => {
+        const pill = document.createElement('span');
+        pill.className = 'dm-source-pill';
+        const icon = document.createElement('i');
+        icon.className = 'fas fa-file-alt';
+        pill.appendChild(icon);
+        pill.appendChild(document.createTextNode(' ' + s));
+        sourcesWrap.appendChild(pill);
+      });
+      contentWrap.appendChild(sourcesWrap);
+    }
+
+    const meta = document.createElement('div');
+    meta.className = 'dm-msg-meta';
+    meta.textContent = `${isAI ? 'DocMind AI' : isError ? 'Error' : 'You'} · ${time}`;
+    contentWrap.appendChild(meta);
+
+    msgEl.appendChild(avatar);
+    msgEl.appendChild(contentWrap);
     messages.appendChild(msgEl);
     messages.scrollTop = messages.scrollHeight;
+
     return msgEl;
   }
 
-  // ── Upload document ───────────────────────────────────────────────────
-  async function uploadDocument(file) {
-    if (!file) return;
+  // Add initial welcome message (trusted HTML)
+  addMessage('ai',
+    `👋 Hi! I'm <strong>DocMind AI</strong> — a RAG-powered assistant built by Ryan.<br><br>
+     Upload up to <strong>${MAX_FILES}</strong> files on the left (PDF, TXT, DOC/DOCX, CSV, XLS/XLSX, JPG/PNG/WEBP), then ask me anything.`,
+    [],
+    { trustedHtml: true }
+  );
 
-    setStatus('loading', 'Uploading & indexing...');
-    uploadZone.style.display = 'none';
-    fileInfo.style.display = 'flex';
-    fileName.textContent = file.name;
-    fileChunks.textContent = 'Indexing document...';
+  // ── Documents UI ──────────────────────────────────────────────────────
+  function extOf(name) {
+    const idx = name.lastIndexOf('.');
+    return idx >= 0 ? name.slice(idx).toLowerCase() : '';
+  }
 
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
+  function renderDocuments(docsPayload) {
+    const docs = docsPayload?.documents || [];
+    const total = docsPayload?.file_count ?? docs.length;
+    const max = docsPayload?.max_files ?? MAX_FILES;
+    const totalChunks = docsPayload?.total_chunks ?? 0;
 
-      const resp = await fetch(API_BASE + '/upload', {
-        method: 'POST',
-        body: formData
+    if (total > 0) {
+      filesPanel.style.display = 'block';
+      setStatus('ready', `${total}/${max} files loaded`);
+      setDocLoaded(true);
+    } else {
+      filesPanel.style.display = 'none';
+      setStatus('idle', 'No documents loaded');
+      setDocLoaded(false);
+    }
+
+    fileListEl.innerHTML = '';
+    docs.forEach(d => {
+      const row = document.createElement('div');
+      row.className = 'dm-file-info';
+
+      const icon = document.createElement('div');
+      icon.className = 'dm-file-icon';
+      icon.innerHTML = '<i class="fas fa-file-alt"></i>';
+
+      const details = document.createElement('div');
+      details.className = 'dm-file-details';
+
+      const nameEl = document.createElement('span');
+      nameEl.className = 'dm-file-name';
+      nameEl.title = d.name;
+      nameEl.textContent = d.name;
+
+      const chunksEl = document.createElement('span');
+      chunksEl.className = 'dm-file-chunks';
+      chunksEl.textContent = `✓ ${d.chunk_count} chunks · ${d.file_type}`;
+
+      details.appendChild(nameEl);
+      details.appendChild(chunksEl);
+
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'dm-file-remove';
+      removeBtn.type = 'button';
+      removeBtn.title = `Remove ${d.name}`;
+      removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+
+      removeBtn.addEventListener('click', async () => {
+        if (isThinking) return;
+        try {
+          setStatus('loading', 'Removing...');
+          const resp = await fetch(API_BASE + '/documents/' + encodeURIComponent(d.name), { method: 'DELETE' });
+          if (!resp.ok) {
+            const err = await resp.json().catch(() => ({}));
+            throw new Error(err.detail || 'Failed to remove document');
+          }
+          addMessage('ai', `Removed: ${d.name}`);
+        } catch (e) {
+          addMessage('error', `Remove failed: ${e.message}`);
+        } finally {
+          await refreshDocuments();
+        }
       });
 
-      if (!resp.ok) {
-        const err = await resp.json();
-        throw new Error(err.detail || 'Upload failed');
-      }
+      row.appendChild(icon);
+      row.appendChild(details);
+      row.appendChild(removeBtn);
 
-      const data = await resp.json();
-      fileChunks.textContent = `✓ ${data.chunks} chunks indexed`;
-      setStatus('ready', 'Document ready');
-      documentLoaded = true;
+      fileListEl.appendChild(row);
+    });
 
-      // Enable input
-      input.disabled = false;
-      sendBtn.disabled = false;
-      input.placeholder = 'Ask anything about your document...';
-      chatSub.textContent = 'Document loaded · Ask anything';
-      sampleBtns.forEach(b => b.disabled = false);
+    filesMeta.textContent = `Total chunks: ${totalChunks}`;
+  }
 
-      addMessage('ai', `✅ I've indexed <strong>${file.name}</strong> into <strong>${data.chunks} chunks</strong>. I'm ready to answer questions about it — what would you like to know?`);
-
-    } catch (err) {
-      setStatus('error', 'Upload failed');
-      fileChunks.textContent = '✗ Failed to upload';
-      addMessage('error', `Failed to upload document: ${err.message}. Make sure the HuggingFace Space is running.`);
-      uploadZone.style.display = 'block';
-      fileInfo.style.display = 'none';
+  async function refreshDocuments() {
+    try {
+      const r = await fetch(API_BASE + '/documents', { cache: 'no-store' });
+      if (!r.ok) throw new Error('Failed to fetch documents');
+      const data = await r.json();
+      renderDocuments(data);
+      return data;
+    } catch (e) {
+      // If API base is wrong or the Space is asleep, show a clear error state.
+      setStatus('error', 'API unreachable');
+      setDocLoaded(false);
+      filesPanel.style.display = 'none';
+      addMessage(
+        'error',
+        `Can't reach the API. Open the Hugging Face Space to wake it up, then try again.`
+      );
+      return null;
     }
   }
 
-  // ── Send query ────────────────────────────────────────────────────────
+  // ── Upload (multi-file, additive, up to 5) ────────────────────────────
+  async function uploadOne(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const resp = await fetch(API_BASE + '/upload', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!resp.ok) {
+      const err = await resp.json().catch(() => ({}));
+      throw new Error(err.detail || 'Upload failed');
+    }
+
+    return await resp.json();
+  }
+
+  async function handleFiles(fileList) {
+    const files = Array.from(fileList || []);
+    if (!files.length) return;
+
+    const current = await refreshDocuments();
+    const currentCount = current?.file_count ?? 0;
+    const remaining = Math.max(0, MAX_FILES - currentCount);
+
+    if (remaining === 0) {
+      addMessage('error', `You already have ${MAX_FILES} files loaded. Remove one to upload more.`);
+      return;
+    }
+
+    const selected = files.slice(0, remaining);
+
+    // Validate client-side (backend will validate too)
+    const rejected = [];
+    const accepted = [];
+
+    for (const f of selected) {
+      const ext = extOf(f.name);
+      if (f.size > MAX_BYTES) rejected.push(`${f.name} (over ${MAX_MB}MB)`);
+      else if (!SUPPORTED_EXT.has(ext)) rejected.push(`${f.name} (unsupported type)`);
+      else accepted.push(f);
+    }
+
+    if (rejected.length) {
+      addMessage('error', `Skipped:\n- ${rejected.join('\n- ')}`);
+    }
+
+    if (!accepted.length) return;
+
+    setStatus('loading', 'Uploading & indexing...');
+
+    // Upload sequentially (keeps server happy + easier UI)
+    for (const f of accepted) {
+      try {
+        const res = await uploadOne(f);
+        addMessage('ai', res.message || `Indexed ${res.filename} (${res.chunks} chunks)`);
+      } catch (e) {
+        addMessage('error', `Failed to upload ${f.name}: ${e.message}`);
+      }
+    }
+
+    await refreshDocuments();
+  }
+
+  // ── Query ─────────────────────────────────────────────────────────────
   async function sendQuery(question) {
     if (!question.trim() || isThinking || !documentLoaded) return;
 
@@ -896,61 +1096,72 @@
         body: JSON.stringify({ question })
       });
 
-      if (!resp.ok) throw new Error('Request failed: ' + resp.status);
+      if (!resp.ok) {
+        const err = await resp.json().catch(() => ({}));
+        throw new Error(err.detail || ('Request failed: ' + resp.status));
+      }
 
       const data = await resp.json();
 
       if (data.success) {
-        addMessage('ai', data.answer, data.sources);
+        // Treat API output as text to avoid HTML injection
+        addMessage('ai', data.answer || '(No answer returned)', data.sources || []);
       } else {
         addMessage('error', `Something went wrong: ${data.error || 'Unknown error'}`);
       }
 
     } catch (err) {
-      addMessage('error', `Connection error: ${err.message}. The HuggingFace Space may be sleeping — <a href="https://huggingface.co/spaces/Ryanfafa/docmind-ai" target="_blank" style="color:#60a5fa;">open it directly</a> to wake it up, then try again.`);
+      addMessage(
+        'error',
+        `Connection error: ${err.message}. The Space may be sleeping — open it to wake it up, then try again.`
+      );
     } finally {
       setThinking(false);
     }
   }
 
-  // ── Event listeners ───────────────────────────────────────────────────
-  // File input
-  fileInput.addEventListener('change', () => {
-    if (fileInput.files[0]) uploadDocument(fileInput.files[0]);
+  // ── Buttons: clear all / clear memory ─────────────────────────────────
+  clearAllBtn.addEventListener('click', async () => {
+    if (isThinking) return;
+    try {
+      setStatus('loading', 'Clearing...');
+      await fetch(API_BASE + '/reset', { method: 'POST' });
+      addMessage('ai', 'Cleared all documents and chat memory.');
+    } catch (e) {
+      addMessage('error', 'Failed to clear all. Try again.');
+    } finally {
+      await refreshDocuments();
+    }
   });
 
-  // Drag and drop
+  clearMemoryBtn.addEventListener('click', async () => {
+    if (isThinking) return;
+    try {
+      setStatus(documentLoaded ? 'ready' : 'idle', 'Clearing memory...');
+      const r = await fetch(API_BASE + '/memory/clear', { method: 'POST' });
+      if (!r.ok) throw new Error('Failed');
+      addMessage('ai', 'Chat memory cleared (documents kept).');
+    } catch (e) {
+      addMessage('error', 'Failed to clear memory.');
+    } finally {
+      await refreshDocuments();
+    }
+  });
+
+  // ── Event listeners ───────────────────────────────────────────────────
+  fileInput.addEventListener('change', () => handleFiles(fileInput.files));
+
   uploadZone.addEventListener('click', () => fileInput.click());
   uploadZone.addEventListener('dragover', (e) => { e.preventDefault(); uploadZone.classList.add('dragover'); });
   uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
   uploadZone.addEventListener('drop', (e) => {
     e.preventDefault();
     uploadZone.classList.remove('dragover');
-    const file = e.dataTransfer.files[0];
-    if (file) uploadDocument(file);
+    handleFiles(e.dataTransfer.files);
   });
 
-  // Remove file
-  fileRemove.addEventListener('click', async () => {
-    try {
-      await fetch(API_BASE + '/reset', { method: 'POST' });
-    } catch {}
-    documentLoaded = false;
-    fileInfo.style.display = 'none';
-    uploadZone.style.display = 'block';
-    input.disabled = true;
-    sendBtn.disabled = true;
-    input.placeholder = 'Upload a document first, then ask anything...';
-    setStatus('idle', 'No document loaded');
-    chatSub.textContent = 'Ready to analyze your document';
-    sampleBtns.forEach(b => b.disabled = true);
-    addMessage('ai', 'Document removed. Upload a new document to continue.');
-  });
-
-  // Send button
   sendBtn.addEventListener('click', () => sendQuery(input.value));
 
-  // Enter key
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -958,15 +1169,13 @@
     }
   });
 
-  // Auto-resize textarea
   input.addEventListener('input', () => {
     input.style.height = 'auto';
     input.style.height = Math.min(input.scrollHeight, 120) + 'px';
   });
 
-  // Sample questions
   sampleBtns.forEach(btn => {
-    btn.disabled = true; // disabled until doc loaded
+    btn.disabled = true; // enabled after docs load
     btn.addEventListener('click', () => {
       const q = btn.getAttribute('data-q');
       if (q && documentLoaded && !isThinking) {
@@ -976,8 +1185,11 @@
     });
   });
 
+  // Initial sync (if server already has docs loaded)
+  await refreshDocuments();
 })();
 </script>
+
 <!-- ==================== CONTACT SECTION ==================== -->
 <section id="contact" class="contact">
     <div class="container">
@@ -985,7 +1197,7 @@
             <span class="section-tag light"><i class="fas fa-paper-plane"></i> Get in touch</span>
             <h2 class="section-title light">Let's Work Together</h2>
             <p class="section-subtitle">
-                I'm currently open to new opportunities. Whether you have a project 
+                I'm currently open to new opportunities. Whether you have a project
                 in mind, a question, or just want to connect — my inbox is always open.
             </p>
         </div>
@@ -998,7 +1210,7 @@
                 <p>Ryan.farahani97@gmail.com</p>
                 <span class="contact-action">Send a message <i class="fas fa-arrow-right"></i></span>
             </a>
-            <a href="https://linkedin.com/in/ryan-farahanii" target="_blank" class="contact-card">
+            <a href="https://linkedin.com/in/ryan-farahanii" target="_blank" rel="noopener noreferrer" class="contact-card">
                 <div class="contact-icon-wrapper linkedin">
                     <i class="fab fa-linkedin-in"></i>
                 </div>
@@ -1006,7 +1218,7 @@
                 <p>ryan-farahanii</p>
                 <span class="contact-action">Connect with me <i class="fas fa-arrow-right"></i></span>
             </a>
-            <a href="https://github.com/ryanfarahani1" target="_blank" class="contact-card">
+            <a href="https://github.com/ryanfarahani1" target="_blank" rel="noopener noreferrer" class="contact-card">
                 <div class="contact-icon-wrapper github">
                     <i class="fab fa-github"></i>
                 </div>
@@ -1027,8 +1239,8 @@
             </div>
             <p class="footer-text">Designed & built by Ryan Farahani © 2025</p>
             <div class="footer-social">
-                <a href="https://linkedin.com/in/ryan-farahanii" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://github.com/ryanfarahani1" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/ryan-farahanii" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/ryanfarahani1" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 <a href="mailto:Ryan.farahani97@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
