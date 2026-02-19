@@ -4,11 +4,13 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     // ==================== CUSTOM CURSOR ====================
     const cursorDot = document.getElementById('cursorDot');
     const cursorRing = document.getElementById('cursorRing');
 
-    if (window.innerWidth > 768) {
+    if (window.innerWidth > 768 && !prefersReducedMotion) {
         let mouseX = 0, mouseY = 0;
         let ringX = 0, ringY = 0;
 
@@ -148,7 +150,11 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(typeEffect, typingSpeed);
     }
 
-    typeEffect();
+    if (prefersReducedMotion) {
+        typedElement.textContent = titles[0];
+    } else {
+        typeEffect();
+    }
 
     // ==================== NAVBAR SCROLL ====================
     const navbar = document.getElementById('navbar');
@@ -251,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     backToTop.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
     });
 
     // ==================== COUNTER ANIMATION ====================
