@@ -1086,6 +1086,87 @@ img {
     margin-bottom: 0;
 }
 
+/* Instructions panel (shown before activation) */
+.finger-drawer-instructions {
+    max-width: 720px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
+    padding: 40px 32px;
+}
+[data-theme="dark"] .finger-drawer-instructions {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+.fd-instructions-content {
+    text-align: center;
+}
+.fd-instructions-icon {
+    font-size: 3rem;
+    color: var(--accent-blue);
+    margin-bottom: 20px;
+    display: block;
+}
+.fd-instructions-content h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+}
+.fd-instructions-list {
+    text-align: left;
+    max-width: 560px;
+    margin: 0 auto 24px;
+    padding-left: 24px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+.fd-instructions-list li {
+    margin-bottom: 12px;
+}
+.fd-instructions-list strong {
+    color: var(--text-primary);
+}
+.fd-instructions-note {
+    font-size: 0.875rem;
+    color: var(--text-tertiary);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.fd-instructions-note i {
+    color: var(--accent-blue);
+}
+.fd-activate-btn {
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+.fd-activate-btn i {
+    margin-right: 8px;
+}
+
+@media (max-width: 640px) {
+    .finger-drawer-instructions {
+        padding: 32px 24px;
+    }
+    .fd-instructions-icon {
+        font-size: 2.5rem;
+    }
+    .fd-instructions-content h4 {
+        font-size: 1.25rem;
+    }
+    .fd-instructions-list {
+        padding-left: 20px;
+        font-size: 0.9rem;
+    }
+}
+
 @media (max-width: 640px) {
     .demo-card-caption {
         grid-template-columns: 1fr;

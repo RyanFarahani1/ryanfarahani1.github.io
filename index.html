@@ -187,12 +187,34 @@
     <!-- Finger Drawer (hand tracking) -->
     <div class="demo-block" id="finger-drawer">
       <h3 class="demo-block-title"><i class="fas fa-hand-paper"></i> Finger Drawer</h3>
-      <p class="demo-block-desc">Draw in the air with your index finger. From <a href="https://github.com/RayanFarahani/Finger-drawer" target="_blank" rel="noopener noreferrer">Finger-drawer</a> — hand tracking in the browser.</p>
-      <div class="finger-drawer-wrap">
+      <p class="demo-block-desc">Draw in the air with your index finger using hand tracking. From <a href="https://github.com/RayanFarahani/Finger-drawer" target="_blank" rel="noopener noreferrer">Finger-drawer</a> — now running in your browser.</p>
+      
+      <!-- Instructions before activation -->
+      <div class="finger-drawer-instructions" id="fdInstructions">
+        <div class="fd-instructions-content">
+          <i class="fas fa-hand-paper fd-instructions-icon"></i>
+          <h4>How to Use Finger Drawer</h4>
+          <ol class="fd-instructions-list">
+            <li><strong>Open your hand</strong> — Keep your hand open with fingers extended</li>
+            <li><strong>Move your index finger</strong> — The tip of your index finger acts as the brush</li>
+            <li><strong>Close your fist</strong> — Make a fist to stop drawing and lift your hand</li>
+            <li><strong>Use controls</strong> — Change colors (Red/Green/Blue) and adjust brush size</li>
+            <li><strong>Clear</strong> — Click "Clear" to erase your drawing</li>
+          </ol>
+          <p class="fd-instructions-note"><i class="fas fa-info-circle"></i> Camera access will be requested when you start. Make sure you're in a well-lit area.</p>
+          <button type="button" class="btn btn-primary fd-activate-btn" id="fdActivate">
+            <i class="fas fa-play"></i>
+            <span>Start Drawing</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Drawing interface (hidden until activated) -->
+      <div class="finger-drawer-wrap" id="fdWrap" style="display:none;">
         <div class="finger-drawer-view">
           <video id="fdVideo" class="fd-video" playsinline muted></video>
           <canvas id="fdCanvas" class="fd-canvas"></canvas>
-          <div class="fd-overlay-status" id="fdStatus">Allow camera to start</div>
+          <div class="fd-overlay-status" id="fdStatus">Loading...</div>
         </div>
         <div class="finger-drawer-controls">
           <button type="button" class="fd-btn fd-btn-clear" id="fdClear" title="Clear canvas"><i class="fas fa-eraser"></i> Clear</button>
@@ -206,7 +228,6 @@
           <button type="button" class="fd-btn fd-size" data-dir="+"><i class="fas fa-plus"></i></button>
         </div>
       </div>
-      <p class="finger-drawer-hint">Open hand to draw with index finger; close fist to stop. Requires camera access.</p>
     </div>
 
     <!-- DocMind AI -->
@@ -1256,17 +1277,19 @@
 <!-- ==================== FINGER DRAWER (hand tracking) ==================== -->
 <script type="module">
 (function() {
-  console.log('Finger Drawer script starting...');
+  const activateBtn = document.getElementById('fdActivate');
+  const instructionsEl = document.getElementById('fdInstructions');
+  const wrapEl = document.getElementById('fdWrap');
   const video = document.getElementById('fdVideo');
   const canvas = document.getElementById('fdCanvas');
   const statusEl = document.getElementById('fdStatus');
   const clearBtn = document.getElementById('fdClear');
   const brushSizeEl = document.getElementById('fdBrushSize');
-  if (!video || !canvas) {
-    console.error('Finger Drawer: video or canvas element not found');
+  
+  if (!activateBtn || !instructionsEl || !wrapEl || !video || !canvas) {
+    console.error('Finger Drawer: required elements not found');
     return;
   }
-  console.log('Finger Drawer: elements found, initializing...');
 
   const ctx = canvas.getContext('2d');
   let handLandmarker = null;
@@ -1276,6 +1299,7 @@
   let prevX = null, prevY = null;
   let lastVideoTime = -1;
   let rafId = null;
+  let isActive = false;
 
   function setStatus(text) {
     if (statusEl) statusEl.textContent = text;
@@ -1293,8 +1317,8 @@
   }
 
   function drawFrame() {
-    if (!handLandmarker || video.readyState < 2) {
-      rafId = requestAnimationFrame(drawFrame);
+    if (!isActive || !handLandmarker || video.readyState < 2) {
+      if (isActive) rafId = requestAnimationFrame(drawFrame);
       return;
     }
     const now = performance.now();
@@ -1337,12 +1361,26 @@
     rafId = requestAnimationFrame(drawFrame);
   }
 
+  // Activate button click handler
+  activateBtn.addEventListener('click', async function() {
+    activateBtn.disabled = true;
+    activateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Loading...</span>';
+    
+    // Hide instructions, show drawing interface
+    instructionsEl.style.display = 'none';
+    wrapEl.style.display = 'block';
+    
+    await init();
+  });
+
+  // Clear button
   clearBtn.addEventListener('click', function() {
     if (!ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     setStatus('Cleared');
   });
 
+  // Color buttons
   document.querySelectorAll('.fd-color').forEach(function(btn) {
     btn.addEventListener('click', function() {
       document.querySelectorAll('.fd-color').forEach(function(b) { b.classList.remove('active'); });
@@ -1355,6 +1393,7 @@
   });
   document.querySelector('.fd-color[data-color="g"]').classList.add('active');
 
+  // Brush size buttons
   document.querySelectorAll('.fd-size').forEach(function(btn) {
     btn.addEventListener('click', function() {
       const dir = btn.getAttribute('data-dir');
@@ -1365,31 +1404,33 @@
   });
 
   async function init() {
+    isActive = true;
     setStatus('Loading model…');
-    console.log('Finger Drawer: Loading MediaPipe...');
     try {
       const { HandLandmarker, FilesetResolver } = await import('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/vision_bundle.mjs');
-      console.log('Finger Drawer: MediaPipe imported, creating resolver...');
       const vision = await FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm');
-      console.log('Finger Drawer: Creating HandLandmarker...');
       handLandmarker = await HandLandmarker.createFromOptions(vision, {
         baseOptions: { modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task' },
         numHands: 1,
         runningMode: 'VIDEO'
       });
-      console.log('Finger Drawer: HandLandmarker created successfully');
     } catch (e) {
-      setStatus('Model load failed - check console');
+      setStatus('Model load failed');
       console.error('Finger Drawer: Error loading MediaPipe:', e);
+      activateBtn.disabled = false;
+      activateBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> <span>Retry</span>';
       return;
     }
-    setStatus('Starting camera…');
+    setStatus('Requesting camera access…');
     try {
       stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: 640, height: 480 } });
       video.srcObject = stream;
       await video.play();
     } catch (e) {
-      setStatus('Camera denied or unavailable');
+      setStatus('Camera access denied');
+      console.error('Finger Drawer: Camera error:', e);
+      activateBtn.disabled = false;
+      activateBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> <span>Retry</span>';
       return;
     }
     const resize = function() {
@@ -1408,7 +1449,6 @@
     drawFrame();
   }
 
-  init();
   window.addEventListener('beforeunload', function() {
     if (rafId) cancelAnimationFrame(rafId);
     if (stream) stream.getTracks().forEach(function(t) { t.stop(); });
