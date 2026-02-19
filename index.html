@@ -20,6 +20,9 @@
 <body>
 <a class="skip-link" href="#mainContent">Skip to content</a>
 
+<!-- ==================== SKIP LINK (accessibility) ==================== -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
 <!-- ==================== SCROLL PROGRESS BAR ==================== -->
 <div class="scroll-progress" id="scrollProgress"></div>
 
@@ -28,16 +31,17 @@
 <div class="cursor-ring" id="cursorRing"></div>
 
 <!-- ==================== NAVIGATION ==================== -->
-<nav class="navbar" id="navbar">
+<nav class="navbar" id="navbar" aria-label="Main navigation">
   <div class="nav-container">
-    <a href="#home" class="nav-logo">
+    <a href="#home" class="nav-logo" aria-label="Ryan Farahani home">
       <span class="logo-bracket">&lt;</span>Ryan<span class="logo-bracket">/&gt;</span>
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#home" class="nav-link active" data-section="home">Home</a></li>
+      <li><a href="#demos" class="nav-link" data-section="demos">Demos</a></li>
+      <li><a href="#projects" class="nav-link" data-section="projects">Work</a></li>
       <li><a href="#about" class="nav-link" data-section="about">About</a></li>
       <li><a href="#skills" class="nav-link" data-section="skills">Skills</a></li>
-      <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
       <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
     </ul>
     <div class="nav-actions">
@@ -55,26 +59,25 @@
 
 <main id="mainContent">
 <!-- ==================== HERO SECTION ==================== -->
-<section id="home" class="hero">
+<section id="home" class="hero" aria-label="Introduction">
   <div class="hero-bg-animation">
     <div class="floating-shape shape-1"></div>
     <div class="floating-shape shape-2"></div>
     <div class="floating-shape shape-3"></div>
-    <div class="floating-shape shape-4"></div>
-    <div class="floating-shape shape-5"></div>
     <div class="grid-bg"></div>
   </div>
-  <div class="hero-container">
+  <div class="hero-container" id="main-content">
     <div class="hero-content">
       <div class="hero-badge">
-        <span class="badge-dot"></span>
+        <span class="badge-dot" aria-hidden="true"></span>
         Available for opportunities
       </div>
       <h1 class="hero-name">
-        Hi, I'm <span class="gradient-text">Ryan Farahani</span>
+        I build <span class="gradient-text">AI that ships.</span>
       </h1>
+      <p class="hero-byline">Ryan Farahani — Data Analyst & AI Engineer</p>
       <div class="hero-title-wrapper">
-        <span class="hero-title-static">I'm a&nbsp;</span>
+        <span class="hero-title-static">Data →&nbsp;</span>
         <span class="hero-title-typed" id="typedText"></span>
         <span class="typed-cursor">|</span>
       </div>
@@ -84,13 +87,13 @@
         and thoughtful user experience.
       </p>
       <div class="hero-buttons">
-        <a href="#projects" class="btn btn-primary">
-          <span>View My Work</span>
+        <a href="#demos" class="btn btn-primary">
+          <span>Try my AI demos</span>
           <i class="fas fa-arrow-right"></i>
         </a>
-        <a href="#contact" class="btn btn-ghost">
-          <span>Let's Talk</span>
-          <i class="fas fa-paper-plane"></i>
+        <a href="#projects" class="btn btn-ghost">
+          <span>View projects</span>
+          <i class="fas fa-briefcase"></i>
         </a>
       </div>
       <div class="hero-social">
@@ -109,23 +112,14 @@
       <div class="hero-image-wrapper">
         <div class="hero-image-ring"></div>
         <div class="hero-image-ring ring-2"></div>
-        <img src="images/profile1.jpg" alt="Ryan Farahani" class="hero-photo">
-        <div class="hero-floating-card card-1">
-          <i class="fab fa-python"></i>
-          <span>Python</span>
-        </div>
-        <div class="hero-floating-card card-2">
-          <i class="fas fa-brain"></i>
-          <span>AI/ML</span>
-        </div>
-        <div class="hero-floating-card card-3">
-          <i class="fas fa-chart-line"></i>
-          <span>Analytics</span>
-        </div>
+        <img src="images/profile1.jpg" alt="Ryan Farahani" class="hero-photo" width="300" height="300">
+        <div class="hero-floating-card card-1"><i class="fab fa-python"></i><span>Python</span></div>
+        <div class="hero-floating-card card-2"><i class="fas fa-brain"></i><span>AI/ML</span></div>
+        <div class="hero-floating-card card-3"><i class="fas fa-chart-line"></i><span>Analytics</span></div>
       </div>
     </div>
   </div>
-  <div class="scroll-indicator">
+  <div class="scroll-indicator" aria-hidden="true">
     <span>Scroll</span>
     <div class="scroll-line"></div>
   </div>
@@ -158,176 +152,235 @@
   </div>
 </section>
 
-<!-- ==================== ABOUT SECTION ==================== -->
-<section id="about" class="about">
+<!-- ==================== DEMOS SECTION ==================== -->
+<section id="demos" class="demos-section">
   <div class="container">
     <div class="section-header">
-      <span class="section-tag"><i class="fas fa-user"></i> Get to know me</span>
-      <h2 class="section-title">About Me</h2>
+      <span class="section-tag"><i class="fas fa-rocket"></i> Try it live</span>
+      <h2 class="section-title">Try my AI</h2>
+      <p class="section-subtitle">
+        Image captioning and document Q&A — built and deployed. No sign-up required.
+      </p>
     </div>
-    <div class="about-grid">
-      <div class="about-text-col">
-        <div class="about-text">
-          <p class="about-lead">
-            I'm a <strong>Data Analyst</strong> and <strong>AI Engineer</strong> based in
-            Sydney, Australia, with a Master's in IT specializing in Artificial Intelligence.
-          </p>
-          <p>
-            I specialize in extracting insights from complex datasets, building interactive
-            dashboards, writing optimized SQL queries, and deploying AI/ML models that
-            solve real business problems.
-          </p>
-          <p>
-            I enjoy working with cross-functional teams to translate data into business
-            strategies that drive measurable results. My approach combines analytical
-            rigor with creative problem-solving.
-          </p>
+
+    <!-- Image Captioning -->
+    <div class="demo-block" id="image-captioning">
+      <h3 class="demo-block-title"><i class="fas fa-image"></i> Image Captioning</h3>
+      <p class="demo-block-desc">EfficientNet-B0 + GPT-2 on Hugging Face. Upload an image to get a caption.</p>
+
+    <div class="demo-card demo-card-caption">
+      <div class="demo-card-inner">
+        <input type="file" id="captionImageInput" accept="image/*" class="demo-file-input">
+        <img id="captionImagePreview" alt="Preview" class="demo-preview" style="display:none;">
+      </div>
+      <div class="demo-card-actions">
+        <button class="btn btn-primary" id="captionSubmitBtn">
+          <span>Generate Caption</span>
+          <i class="fas fa-magic"></i>
+        </button>
+        <p id="captionStatus" class="demo-status"></p>
+        <p id="captionResult" class="demo-result"></p>
+      </div>
+    </div>
+    </div>
+
+    <!-- DocMind AI -->
+    <div class="demo-block demo-block-docmind" id="demo">
+<section class="docmind-section" aria-label="DocMind AI demo">
+
+  <!-- Ambient background -->
+  <div class="dm-bg">
+    <div class="dm-orb dm-orb-1"></div>
+    <div class="dm-orb dm-orb-2"></div>
+    <div class="dm-orb dm-orb-3"></div>
+    <div class="dm-grid"></div>
+  </div>
+
+  <div class="container" style="position:relative;z-index:1;">
+
+    <!-- Section header -->
+    <div class="section-header reveal">
+      <span class="section-tag light"><i class="fas fa-brain"></i> Live AI Demo</span>
+      <h2 class="section-title light">DocMind AI</h2>
+      <p class="section-subtitle">
+        Upload up to 5 files (PDF, TXT, DOCX, CSV, XLSX, images) and chat with your documents —
+        powered by RAG, ChromaDB, and Mistral-7B. Running live on Hugging Face.
+      </p>
+    </div>
+
+    <!-- Main demo card -->
+    <div class="dm-card">
+
+      <!-- Left panel: info + upload -->
+      <div class="dm-panel dm-left">
+
+        <!-- Status indicator -->
+        <div class="dm-status" id="dmStatus">
+          <span class="dm-status-dot idle"></span>
+          <span class="dm-status-text">No document loaded</span>
         </div>
-        <div class="about-details">
-          <div class="detail-card">
-            <div class="detail-icon">
-              <i class="fas fa-map-marker-alt"></i>
+
+        <!-- Document list (shown when files are loaded) -->
+        <div class="dm-doc-list" id="dmDocList" style="display:none;">
+          <div class="dm-doc-list-header">
+            <div class="dm-doc-count-wrap">
+              <span class="dm-doc-count-badge" id="dmDocCount">0 / 5</span>
+              <span class="dm-doc-count-label">documents loaded</span>
             </div>
-            <div>
-              <span class="detail-label">Location</span>
-              <span class="detail-value">Sydney, Australia</span>
-            </div>
+            <button class="dm-clear-all-btn" id="dmClearAll" title="Remove all documents">
+              <i class="fas fa-trash-alt"></i> Clear All
+            </button>
           </div>
-          <div class="detail-card">
-            <div class="detail-icon">
-              <i class="fas fa-graduation-cap"></i>
-            </div>
-            <div>
-              <span class="detail-label">Education</span>
-              <span class="detail-value">Master of IT in AI</span>
-            </div>
+          <div class="dm-doc-items" id="dmDocItems"></div>
+          <div class="dm-doc-total" id="dmDocTotal"></div>
+        </div>
+
+        <!-- Upload zone -->
+        <div class="dm-upload-zone" id="dmUploadZone">
+          <input type="file" id="dmFileInput" accept=".pdf,.txt,.doc,.docx,.csv,.xlsx,.xls,.jpg,.jpeg,.png,.webp" multiple hidden>
+          <div class="dm-upload-icon">
+            <i class="fas fa-cloud-upload-alt"></i>
           </div>
-          <div class="detail-card">
-            <div class="detail-icon status-icon">
-              <i class="fas fa-circle"></i>
-            </div>
-            <div>
-              <span class="detail-label">Status</span>
-              <span class="detail-value">Open to opportunities</span>
-            </div>
+          <p class="dm-upload-title" id="dmUploadTitle">Drop your files here</p>
+          <p class="dm-upload-sub" id="dmUploadSub">Up to 5 files &middot; PDF, TXT, DOCX, CSV, XLSX, JPG/PNG/WEBP</p>
+          <button class="dm-upload-btn">
+            <i class="fas fa-folder-open"></i> Browse Files
+          </button>
+        </div>
+        <!-- Max files reached message (hidden by default) -->
+        <div class="dm-max-reached" id="dmMaxReached" style="display:none;">
+          <i class="fas fa-exclamation-circle"></i>
+          Maximum 5 files reached. Remove a file to upload more.
+        </div>
+
+        <!-- OR divider -->
+        <div class="dm-or">
+          <span>or try a sample question</span>
+        </div>
+
+        <!-- Sample questions -->
+        <div class="dm-samples">
+          <button class="dm-sample-btn" data-q="What are the main topics covered in these documents?">
+            <i class="fas fa-list"></i> Main topics
+          </button>
+          <button class="dm-sample-btn" data-q="Summarize the key findings or conclusions.">
+            <i class="fas fa-compress-alt"></i> Summarize
+          </button>
+          <button class="dm-sample-btn" data-q="What recommendations are made?">
+            <i class="fas fa-lightbulb"></i> Recommendations
+          </button>
+          <button class="dm-sample-btn" data-q="What data or evidence is presented?">
+            <i class="fas fa-chart-bar"></i> Evidence
+          </button>
+        </div>
+
+        <!-- Tech stack -->
+        <div class="dm-tech">
+          <span class="dm-tech-label">Powered by</span>
+          <div class="dm-tech-pills">
+            <span>LangChain</span>
+            <span>ChromaDB</span>
+            <span>Mistral-7B</span>
+            <span>FastAPI</span>
+            <span>HuggingFace</span>
           </div>
         </div>
-        <a href="resume.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-          <i class="fas fa-download"></i>
-          <span>Download Resume</span>
+
+        <!-- External link -->
+        <a href="https://huggingface.co/spaces/Ryanfafa/docmind-ai" target="_blank" rel="noopener noreferrer" class="dm-external-link">
+          <i class="fas fa-external-link-alt"></i>
+          Open full app on HuggingFace
         </a>
+
       </div>
-      <div class="about-tech-col">
-        <div class="tech-orbit">
-          <div class="orbit-center">
-            <span>Core<br>Stack</span>
+
+      <!-- Right panel: chat -->
+      <div class="dm-panel dm-right">
+
+        <!-- Chat header -->
+        <div class="dm-chat-header">
+          <div class="dm-chat-avatar">
+            <i class="fas fa-brain"></i>
           </div>
-          <div class="orbit-ring ring-1">
-            <div class="orbit-item" style="--angle: 0deg;"><i class="fab fa-python"></i></div>
-            <div class="orbit-item" style="--angle: 90deg;"><i class="fas fa-database"></i></div>
-            <div class="orbit-item" style="--angle: 180deg;"><i class="fas fa-chart-bar"></i></div>
-            <div class="orbit-item" style="--angle: 270deg;"><i class="fas fa-robot"></i></div>
+          <div>
+            <div class="dm-chat-name">DocMind AI</div>
+            <div class="dm-chat-sub" id="dmChatSub">Ready to analyze your documents</div>
+          </div>
+          <div class="dm-thinking" id="dmThinking">
+            <span></span><span></span><span></span>
           </div>
         </div>
+
+        <!-- Messages -->
+        <div class="dm-messages" id="dmMessages">
+          <!-- Welcome message -->
+          <div class="dm-msg dm-msg-ai">
+            <div class="dm-msg-avatar"><i class="fas fa-brain"></i></div>
+            <div class="dm-msg-content">
+              <div class="dm-msg-bubble">
+                &#x1F44B; Hi! I'm <strong>DocMind AI</strong> — a RAG-powered assistant built by Ryan.<br><br>
+                Upload up to <strong>5 files</strong> (PDF, TXT, DOCX, CSV, XLSX, images) on the left, then ask me anything.
+                I'll retrieve the most relevant sections and give you accurate, grounded answers.
+              </div>
+              <div class="dm-msg-meta">DocMind AI &middot; Just now</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Input area -->
+        <div class="dm-input-area">
+          <div class="dm-input-wrap">
+            <textarea
+              id="dmInput"
+              class="dm-input"
+              placeholder="Upload documents first, then ask anything..."
+              rows="1"
+              disabled
+            ></textarea>
+            <button class="dm-send-btn" id="dmSendBtn" disabled>
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+          <div class="dm-input-hint">
+            <i class="fas fa-shield-alt"></i> Answers are grounded in your documents only — no hallucinations
+          </div>
+        </div>
+
       </div>
     </div>
+
+    <!-- Stats row below card -->
+    <div class="dm-stats-row">
+      <div class="dm-stat-item">
+        <i class="fas fa-layer-group"></i>
+        <span class="dm-stat-val">600</span>
+        <span class="dm-stat-lbl">Token Chunk Size</span>
+      </div>
+      <div class="dm-stat-item">
+        <i class="fas fa-search"></i>
+        <span class="dm-stat-val">MMR</span>
+        <span class="dm-stat-lbl">Search Strategy</span>
+      </div>
+      <div class="dm-stat-item">
+        <i class="fas fa-vector-square"></i>
+        <span class="dm-stat-val">384</span>
+        <span class="dm-stat-lbl">Embedding Dims</span>
+      </div>
+      <div class="dm-stat-item">
+        <i class="fas fa-bolt"></i>
+        <span class="dm-stat-val">Top-3</span>
+        <span class="dm-stat-lbl">Retrieval K</span>
+      </div>
+      <div class="dm-stat-item">
+        <i class="fas fa-robot"></i>
+        <span class="dm-stat-val">Mistral-7B</span>
+        <span class="dm-stat-lbl">LLM Backend</span>
+      </div>
+    </div>
+
   </div>
 </section>
-
-<!-- ==================== SKILLS SECTION ==================== -->
-<section id="skills" class="skills">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-tag"><i class="fas fa-code"></i> What I use</span>
-      <h2 class="section-title">Skills & Tools</h2>
     </div>
-    <div class="skills-grid">
-      <div class="skill-card" data-color="blue">
-        <div class="skill-card-header">
-          <div class="skill-icon-wrapper blue">
-            <i class="fab fa-python"></i>
-          </div>
-          <h3>Python</h3>
-        </div>
-        <p class="skill-description">Data analysis, automation, and ML model development</p>
-        <div class="skill-tags">
-          <span>Pandas</span>
-          <span>NumPy</span>
-          <span>Matplotlib</span>
-          <span>Seaborn</span>
-          <span>Plotly</span>
-          <span>Scikit-learn</span>
-          <span>Streamlit</span>
-        </div>
-        <div class="skill-level">
-          <div class="skill-level-bar" data-width="92"></div>
-        </div>
-      </div>
-
-      <div class="skill-card" data-color="green">
-        <div class="skill-card-header">
-          <div class="skill-icon-wrapper green">
-            <i class="fas fa-database"></i>
-          </div>
-          <h3>SQL</h3>
-        </div>
-        <p class="skill-description">Database design, complex queries, and data pipelines</p>
-        <div class="skill-tags">
-          <span>PostgreSQL</span>
-          <span>MySQL</span>
-          <span>SQL Server</span>
-          <span>CTEs</span>
-          <span>Window Functions</span>
-          <span>Stored Procedures</span>
-        </div>
-        <div class="skill-level">
-          <div class="skill-level-bar" data-width="88"></div>
-        </div>
-      </div>
-
-      <div class="skill-card" data-color="amber">
-        <div class="skill-card-header">
-          <div class="skill-icon-wrapper amber">
-            <i class="fas fa-chart-bar"></i>
-          </div>
-          <h3>Power BI</h3>
-        </div>
-        <p class="skill-description">Interactive dashboards, data modeling, and business intelligence</p>
-        <div class="skill-tags">
-          <span>DAX</span>
-          <span>Power Query</span>
-          <span>Data Modeling</span>
-          <span>Interactive Dashboards</span>
-          <span>Report Design</span>
-        </div>
-        <div class="skill-level">
-          <div class="skill-level-bar" data-width="85"></div>
-        </div>
-      </div>
-
-      <div class="skill-card" data-color="purple">
-        <div class="skill-card-header">
-          <div class="skill-icon-wrapper purple">
-            <i class="fas fa-robot"></i>
-          </div>
-          <h3>AI / ML</h3>
-        </div>
-        <p class="skill-description">Deep learning, NLP, computer vision, and LLM applications</p>
-        <div class="skill-tags">
-          <span>TensorFlow</span>
-          <span>PyTorch</span>
-          <span>NLP</span>
-          <span>Computer Vision</span>
-          <span>LLMs</span>
-          <span>HuggingFace</span>
-          <span>LangChain</span>
-        </div>
-        <div class="skill-level">
-          <div class="skill-level-bar" data-width="90"></div>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- ==================== PROJECTS SECTION ==================== -->
@@ -539,37 +592,186 @@
   </div>
 </section>
 
-<!-- Demo 7: AI -->
-<section id="image-captioning" class="projects">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-tag"><i class="fas fa-image"></i> Live AI Demo</span>
-      <h2 class="section-title">Image Captioning Model</h2>
-      <p class="section-subtitle">
-        Upload an image and see the caption generated by my EfficientNet&#8209;B0 + GPT&#8209;2 model
-        deployed on Hugging Face Spaces.
-      </p>
-    </div>
 
-    <div class="project-card" style="max-width: 600px; margin: 0 auto;">
-      <div class="project-image" style="height:auto;">
-        <input type="file" id="captionImageInput" accept="image/*" style="margin:16px 0;">
-        <img id="captionImagePreview" alt="Selected image preview" style="display:none; margin-top:12px;">
+
+<!-- ==================== ABOUT SECTION ==================== -->
+<section id="about" class="about">
+  <div class="about-bg">
+    <div class="about-orb about-orb-1"></div>
+    <div class="about-orb about-orb-2"></div>
+    <div class="about-orb about-orb-3"></div>
+    <div class="about-grid"></div>
+  </div>
+  <div class="container about-container">
+    <div class="section-header">
+      <span class="section-tag"><i class="fas fa-user"></i> Get to know me</span>
+      <h2 class="section-title">About Me</h2>
+    </div>
+    <div class="about-inner">
+      <div class="about-text-col">
+        <div class="about-text">
+          <p class="about-lead">
+            I'm a <strong>Data Analyst</strong> and <strong>AI Engineer</strong> based in
+            Sydney, Australia, with a Master's in IT specializing in Artificial Intelligence.
+          </p>
+          <p>
+            I specialize in extracting insights from complex datasets, building interactive
+            dashboards, writing optimized SQL queries, and deploying AI/ML models that
+            solve real business problems.
+          </p>
+          <p>
+            I enjoy working with cross-functional teams to translate data into business
+            strategies that drive measurable results. My approach combines analytical
+            rigor with creative problem-solving.
+          </p>
+        </div>
+        <div class="about-details">
+          <div class="detail-card">
+            <div class="detail-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div>
+              <span class="detail-label">Location</span>
+              <span class="detail-value">Sydney, Australia</span>
+            </div>
+          </div>
+          <div class="detail-card">
+            <div class="detail-icon">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div>
+              <span class="detail-label">Education</span>
+              <span class="detail-value">Master of IT in AI</span>
+            </div>
+          </div>
+          <div class="detail-card">
+            <div class="detail-icon status-icon">
+              <i class="fas fa-circle"></i>
+            </div>
+            <div>
+              <span class="detail-label">Status</span>
+              <span class="detail-value">Open to opportunities</span>
+            </div>
+          </div>
+        </div>
+        <a href="resume.pdf" class="btn btn-primary" target="_blank">
+          <i class="fas fa-download"></i>
+          <span>Download Resume</span>
+        </a>
       </div>
-      <div class="project-info">
-        <button class="btn btn-primary" id="captionSubmitBtn">
-          <span>Generate Caption</span>
-          <i class="fas fa-magic"></i>
-        </button>
-        <p id="captionStatus" style="margin-top:12px; font-size:0.9rem; color:var(--text-tertiary);"></p>
-        <p id="captionResult" style="margin-top:8px; font-weight:600;"></p>
+      <div class="about-tech-col">
+        <div class="tech-orbit">
+          <div class="orbit-center">
+            <span>Core<br>Stack</span>
+          </div>
+          <div class="orbit-ring ring-1">
+            <div class="orbit-item" style="--angle: 0deg;"><i class="fab fa-python"></i></div>
+            <div class="orbit-item" style="--angle: 90deg;"><i class="fas fa-database"></i></div>
+            <div class="orbit-item" style="--angle: 180deg;"><i class="fas fa-chart-bar"></i></div>
+            <div class="orbit-item" style="--angle: 270deg;"><i class="fas fa-robot"></i></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==================== DOCMIND AI — NATIVE CHAT DEMO ==================== -->
-<section id="demo" class="docmind-section">
+<!-- ==================== SKILLS SECTION ==================== -->
+<section id="skills" class="skills">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag"><i class="fas fa-code"></i> What I use</span>
+      <h2 class="section-title">Skills & Tools</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card" data-color="blue">
+        <div class="skill-card-header">
+          <div class="skill-icon-wrapper blue">
+            <i class="fab fa-python"></i>
+          </div>
+          <h3>Python</h3>
+        </div>
+        <p class="skill-description">Data analysis, automation, and ML model development</p>
+        <div class="skill-tags">
+          <span>Pandas</span>
+          <span>NumPy</span>
+          <span>Matplotlib</span>
+          <span>Seaborn</span>
+          <span>Plotly</span>
+          <span>Scikit-learn</span>
+          <span>Streamlit</span>
+        </div>
+        <div class="skill-level">
+          <div class="skill-level-bar" data-width="92"></div>
+        </div>
+      </div>
+
+      <div class="skill-card" data-color="green">
+        <div class="skill-card-header">
+          <div class="skill-icon-wrapper green">
+            <i class="fas fa-database"></i>
+          </div>
+          <h3>SQL</h3>
+        </div>
+        <p class="skill-description">Database design, complex queries, and data pipelines</p>
+        <div class="skill-tags">
+          <span>PostgreSQL</span>
+          <span>MySQL</span>
+          <span>SQL Server</span>
+          <span>CTEs</span>
+          <span>Window Functions</span>
+          <span>Stored Procedures</span>
+        </div>
+        <div class="skill-level">
+          <div class="skill-level-bar" data-width="88"></div>
+        </div>
+      </div>
+
+      <div class="skill-card" data-color="amber">
+        <div class="skill-card-header">
+          <div class="skill-icon-wrapper amber">
+            <i class="fas fa-chart-bar"></i>
+          </div>
+          <h3>Power BI</h3>
+        </div>
+        <p class="skill-description">Interactive dashboards, data modeling, and business intelligence</p>
+        <div class="skill-tags">
+          <span>DAX</span>
+          <span>Power Query</span>
+          <span>Data Modeling</span>
+          <span>Interactive Dashboards</span>
+          <span>Report Design</span>
+        </div>
+        <div class="skill-level">
+          <div class="skill-level-bar" data-width="85"></div>
+        </div>
+      </div>
+
+      <div class="skill-card" data-color="purple">
+        <div class="skill-card-header">
+          <div class="skill-icon-wrapper purple">
+            <i class="fas fa-robot"></i>
+          </div>
+          <h3>AI / ML</h3>
+        </div>
+        <p class="skill-description">Deep learning, NLP, computer vision, and LLM applications</p>
+        <div class="skill-tags">
+          <span>TensorFlow</span>
+          <span>PyTorch</span>
+          <span>NLP</span>
+          <span>Computer Vision</span>
+          <span>LLMs</span>
+          <span>HuggingFace</span>
+          <span>LangChain</span>
+        </div>
+        <div class="skill-level">
+          <div class="skill-level-bar" data-width="90"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
   <!-- Ambient background -->
   <div class="dm-bg">
