@@ -6,7 +6,7 @@
   <title>Rayan Farahani | Data Analyst & AI Engineer</title>
   <meta name="description" content="Data Analyst & AI Engineer specializing in Python, SQL, Power BI, and Machine Learning. Based in Sydney, Australia.">
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' x='50' text-anchor='middle' font-size='85' fill='%233b82f6' font-family='monospace' font-weight='bold'>&lt;R/&gt;</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%233b82f6'/%3E%3Ctext x='50' y='70' font-family='monospace' font-size='60' font-weight='bold' fill='white' text-anchor='middle'%3ER/%3C/text%3E%3C/svg%3E">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,28 +18,73 @@
   
   <style>
     /* =========================================
-       FORCE PERMANENT DARK MODE
+       FORCE PERMANENT DARK MODE & READABILITY
        ========================================= */
     :root, body, html, [data-theme="light"] {
       --bg-primary: #0f172a !important;
       --bg-secondary: #1e293b !important;
       --bg-tertiary: #334155 !important;
-      --text-primary: #f1f5f9 !important;
-      --text-secondary: #94a3b8 !important;
-      --text-tertiary: #64748b !important;
+      --text-primary: #ffffff !important;
+      --text-secondary: #e2e8f0 !important;
+      --text-tertiary: #cbd5e1 !important;
       --border-color: #334155 !important;
-      --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.35) !important;
-      --card-hover-shadow: 0 20px 60px rgba(0, 0, 0, 0.45) !important;
-      --nav-bg: rgba(15, 23, 42, 0.92) !important;
-      --gradient-subtle: linear-gradient(135deg, #0f172a, #1e293b) !important;
       --code-bg: #0a0e1a !important;
-      --glass-bg: rgba(255, 255, 255, 0.02) !important;
-      --glass-border: rgba(255, 255, 255, 0.04) !important;
       background-color: var(--bg-primary) !important;
       color: var(--text-primary) !important;
     }
 
-    /* Demo instructions box styles */
+    /* Force descriptions to be bright and legible */
+    p.skill-description, .project-info p, .demo-block-desc, .hero-description, .about-text p {
+      color: #cbd5e1 !important;
+      font-size: 1rem !important;
+      font-weight: 400 !important;
+      line-height: 1.7 !important;
+    }
+
+    h3 {
+      color: #ffffff !important;
+    }
+
+    /* Skills Tags & Logo Alignment */
+    .skill-tags span {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      background: #1e293b !important;
+      border: 1px solid #475569 !important;
+      color: #f8fafc !important;
+      padding: 6px 14px !important;
+      font-size: 0.85rem !important;
+    }
+    
+    /* Ensure dark original logos are visible on dark background */
+    .skill-tags span img {
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+      filter: drop-shadow(0px 0px 2px rgba(255,255,255,0.8)); 
+    }
+
+    /* Force hero title onto a single line */
+    .hero-title-wrapper {
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      white-space: nowrap !important;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-title-static, .hero-title-typed, .typed-cursor {
+      display: inline-block !important;
+      white-space: nowrap !important;
+    }
+    @media (max-width: 768px) {
+      .hero-title-wrapper {
+        justify-content: center !important;
+      }
+    }
+
+    /* Demo instructions box */
     .demo-instructions-box {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -47,11 +92,6 @@
       border-radius: 8px;
       margin-bottom: 1.5rem;
       font-size: 0.9rem;
-    }
-    .demo-instructions-box p {
-      margin-top: 0;
-      margin-bottom: 0.5rem;
-      line-height: 1.4;
     }
     .demo-category-scroll {
       max-height: 70px;
@@ -62,37 +102,6 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.8rem;
       line-height: 1.6;
-    }
-
-    /* Skills Logo Alignment Fixes */
-    .skill-tags span {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .skill-tags span img {
-      width: 16px;
-      height: 16px;
-      object-fit: contain;
-    }
-
-    /* Force hero title onto a single line always */
-    .hero-title-wrapper {
-      display: flex !important;
-      flex-direction: row !important;
-      flex-wrap: nowrap !important;
-      white-space: nowrap !important;
-      align-items: center;
-      gap: 6px;
-    }
-    .hero-title-static, .hero-title-typed, .typed-cursor {
-      display: inline-block !important;
-      white-space: nowrap !important;
-    }
-    @media (max-width: 768px) {
-      .hero-title-wrapper {
-        justify-content: center !important;
-      }
     }
   </style>
 </head>
@@ -879,7 +888,7 @@
             </div>
             <p class="skill-description">Interactive dashboards, data modeling, and business intelligence</p>
             <div class="skill-tags">
-              <span><img src="https://cdn.simpleicons.org/powerbi" alt="Power BI"> Power BI</span>
+              <span><i class="fas fa-chart-bar" style="color: #F2C811; font-size: 16px;"></i> Power BI</span>
               <span><i class="fas fa-function"></i> DAX</span>
               <span><i class="fas fa-bolt"></i> Power Query</span>
               <span><i class="fas fa-project-diagram"></i> Data Modeling</span>
@@ -912,10 +921,10 @@
             </div>
             <p class="skill-description">Deployment, infrastructure, and automated workflows</p>
             <div class="skill-tags">
-              <span><img src="https://cdn.simpleicons.org/amazonaws/FF9900" alt="AWS"> AWS</span>
-              <span><img src="https://cdn.simpleicons.org/microsoftazure" alt="Azure"> Azure</span>
-              <span><img src="https://cdn.simpleicons.org/n8n" alt="n8n"> n8n</span>
-              <span><img src="https://cdn.simpleicons.org/microsoft" alt="Microsoft"> Power Automate</span>
+              <span><i class="fab fa-aws" style="color: #FF9900; font-size: 16px;"></i> AWS</span>
+              <span><i class="fab fa-microsoft" style="color: #0089D6; font-size: 16px;"></i> Azure</span>
+              <span><i class="fas fa-project-diagram" style="color: #EA4B71; font-size: 16px;"></i> n8n</span>
+              <span><i class="fas fa-bolt" style="color: #0066FF; font-size: 16px;"></i> Power Automate</span>
               <span><i class="fas fa-network-wired"></i> APIs & Webhooks</span>
             </div>
             <div class="skill-level"><div class="skill-level-bar" data-width="86"></div></div>
