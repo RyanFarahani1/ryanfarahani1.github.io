@@ -91,9 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: formData,
                 });
 
-                console.log('Response status:', resp.status);
+                
                 const text = await resp.text();
-                console.log('Raw response:', text);
+                
 
                 if (!resp.ok) {
                     captionStatus.textContent = `Error: ${resp.status}`;
