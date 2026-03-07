@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rayan Farahani | Data Analyst & AI Engineer</title>
   <meta name="description" content="Data Analyst & AI Engineer specializing in Python, SQL, Power BI, and Machine Learning. Based in Sydney, Australia.">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%233b82f6' font-family='monospace', font-weight='bold'>&lt;R/&gt;</text></svg>">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,7 +46,7 @@
       line-height: 1.6;
     }
 
-    /* Skills Logo Fixes */
+    /* Skills Logo Alignment Fixes */
     .skill-tags span {
       display: inline-flex;
       align-items: center;
@@ -54,6 +56,21 @@
       width: 16px;
       height: 16px;
       object-fit: contain;
+    }
+
+    /* Force hero title onto a single line always */
+    .hero-title-wrapper {
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      white-space: nowrap !important;
+      align-items: center;
+    }
+    @media (max-width: 768px) {
+      .hero-title-wrapper {
+        justify-content: center !important;
+        font-size: clamp(1.1rem, 4vw, 1.5rem) !important;
+      }
     }
   </style>
 </head>
@@ -80,11 +97,6 @@
         <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
       </ul>
       <div class="nav-actions">
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-          <i class="fas fa-moon"></i>
-          <i class="fas fa-sun"></i>
-        </button>
-
         <div class="hamburger" id="hamburger" aria-label="Open menu" role="button" tabindex="0">
           <span></span><span></span><span></span>
         </div>
@@ -812,12 +824,12 @@
             </div>
             <p class="skill-description">Data analysis, APIs, app deployment, and modeling</p>
             <div class="skill-tags">
-              <span><img src="https://cdn.simpleicons.org/pandas" alt="Pandas"> Pandas</span>
-              <span><img src="https://cdn.simpleicons.org/numpy" alt="NumPy"> NumPy</span>
-              <span><img src="https://cdn.simpleicons.org/scikitlearn" alt="Scikit-learn"> Scikit-learn</span>
-              <span><img src="https://cdn.simpleicons.org/streamlit" alt="Streamlit"> Streamlit</span>
-              <span><img src="https://cdn.simpleicons.org/fastapi" alt="FastAPI"> FastAPI</span>
-              <span><img src="https://cdn.simpleicons.org/gradio" alt="Gradio"> Gradio</span>
+              <span><img src="https://cdn.simpleicons.org/pandas/white" alt="Pandas"> Pandas</span>
+              <span><img src="https://cdn.simpleicons.org/numpy/white" alt="NumPy"> NumPy</span>
+              <span><img src="https://cdn.simpleicons.org/scikitlearn/white" alt="Scikit-learn"> Scikit-learn</span>
+              <span><img src="https://cdn.simpleicons.org/streamlit/white" alt="Streamlit"> Streamlit</span>
+              <span><img src="https://cdn.simpleicons.org/fastapi/white" alt="FastAPI"> FastAPI</span>
+              <span><img src="https://cdn.simpleicons.org/gradio/white" alt="Gradio"> Gradio</span>
             </div>
             <div class="skill-level"><div class="skill-level-bar" data-width="92"></div></div>
           </div>
@@ -829,9 +841,9 @@
             </div>
             <p class="skill-description">Relational architecture, vector storage, and data pipelines</p>
             <div class="skill-tags">
-              <span><img src="https://cdn.simpleicons.org/postgresql" alt="PostgreSQL"> PostgreSQL</span>
+              <span><img src="https://cdn.simpleicons.org/postgresql/white" alt="PostgreSQL"> PostgreSQL</span>
               <span><i class="fas fa-vector-square"></i> pgvector</span>
-              <span><img src="https://cdn.simpleicons.org/mysql" alt="MySQL"> MySQL</span>
+              <span><img src="https://cdn.simpleicons.org/mysql/white" alt="MySQL"> MySQL</span>
               <span><i class="fas fa-database"></i> ChromaDB</span>
               <span><i class="fas fa-table"></i> CTEs & Window Functions</span>
             </div>
@@ -845,7 +857,7 @@
             </div>
             <p class="skill-description">Interactive dashboards, data modeling, and business intelligence</p>
             <div class="skill-tags">
-              <span><img src="https://cdn.simpleicons.org/powerbi" alt="Power BI"> Power BI</span>
+              <span><img src="https://cdn.simpleicons.org/powerbi/white" alt="Power BI"> Power BI</span>
               <span><i class="fas fa-function"></i> DAX</span>
               <span><i class="fas fa-bolt"></i> Power Query</span>
               <span><i class="fas fa-project-diagram"></i> Data Modeling</span>
@@ -861,11 +873,11 @@
             </div>
             <p class="skill-description">Deep learning, NLP, RAG, and Computer Vision</p>
             <div class="skill-tags">
-              <span><img src="https://cdn.simpleicons.org/pytorch" alt="PyTorch"> PyTorch</span>
-              <span><img src="https://cdn.simpleicons.org/tensorflow" alt="TensorFlow"> TensorFlow</span>
+              <span><img src="https://cdn.simpleicons.org/pytorch/white" alt="PyTorch"> PyTorch</span>
+              <span><img src="https://cdn.simpleicons.org/tensorflow/white" alt="TensorFlow"> TensorFlow</span>
               <span><i class="fas fa-brain"></i> RAG & LLMs</span>
-              <span><img src="https://cdn.simpleicons.org/langchain" alt="LangChain"> LangChain</span>
-              <span><img src="https://cdn.simpleicons.org/huggingface" alt="HuggingFace"> HuggingFace</span>
+              <span><img src="https://cdn.simpleicons.org/langchain/white" alt="LangChain"> LangChain</span>
+              <span><img src="https://cdn.simpleicons.org/huggingface/white" alt="HuggingFace"> HuggingFace</span>
               <span><i class="fas fa-eye"></i> Computer Vision</span>
             </div>
             <div class="skill-level"><div class="skill-level-bar" data-width="90"></div></div>
@@ -878,10 +890,10 @@
             </div>
             <p class="skill-description">Deployment, infrastructure, and automated workflows</p>
             <div class="skill-tags">
-              <span><img src="https://cdn.simpleicons.org/amazonaws" alt="AWS"> AWS</span>
-              <span><img src="https://cdn.simpleicons.org/microsoftazure" alt="Azure"> Azure</span>
-              <span><img src="https://cdn.simpleicons.org/n8n" alt="n8n"> n8n</span>
-              <span><img src="https://cdn.simpleicons.org/powerautomate" alt="Power Automate"> Power Automate</span>
+              <span><img src="https://cdn.simpleicons.org/amazonaws/white" alt="AWS"> AWS</span>
+              <span><img src="https://cdn.simpleicons.org/microsoftazure/white" alt="Azure"> Azure</span>
+              <span><img src="https://cdn.simpleicons.org/n8n/white" alt="n8n"> n8n</span>
+              <span><img src="https://cdn.simpleicons.org/microsoftpowerautomate/white" alt="Power Automate"> Power Automate</span>
               <span><i class="fas fa-network-wired"></i> APIs & Webhooks</span>
             </div>
             <div class="skill-level"><div class="skill-level-bar" data-width="86"></div></div>
