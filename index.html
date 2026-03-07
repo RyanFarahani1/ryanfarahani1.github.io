@@ -6,7 +6,7 @@
   <title>Rayan Farahani | Data Analyst & AI Engineer</title>
   <meta name="description" content="Data Analyst & AI Engineer specializing in Python, SQL, Power BI, and Machine Learning. Based in Sydney, Australia.">
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%233b82f6'/%3E%3Ctext x='50' y='70' font-family='monospace' font-size='60' font-weight='bold' fill='white' text-anchor='middle'%3ER%2F%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjIwIiBmaWxsPSIjM2I4MmY2Ii8+PHRleHQgeD0iNTAiIHk9IjcwIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjYwIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlIvPC90ZXh0Pjwvc3ZnPg==">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,28 +31,40 @@
       color: #ffffff !important;
     }
 
+    /* Dark background text */
+    .hero-description, .about-text p, .demo-block-desc, .section-subtitle, .fd-instructions-note {
+      color: #cbd5e1 !important;
+      font-size: 1rem !important;
+      line-height: 1.7 !important;
+    }
+
     /* =========================================
-       BRIGHT CARDS OVERRIDE
+       BRIGHT CARDS (Skills, Projects, Stats)
        ========================================= */
-    .skill-card, .project-card, .contact-card {
+    .skill-card, .project-card, .stats-bar {
       background-color: #ffffff !important;
       border: 1px solid #e2e8f0 !important;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
     }
 
-    /* Card Titles (Dark) */
-    .skill-card h3, .project-card h3, .contact-card h3, .skill-card-header h3, .project-info h3 {
+    /* Bright Card Titles (Dark Text) */
+    .skill-card h3, .project-card h3, .skill-card-header h3, .project-info h3 {
       color: #0f172a !important;
     }
 
-    /* Card Descriptions (Dark Grey) */
-    p.skill-description, .project-info p, .contact-card p {
+    /* Bright Card Descriptions (Dark Text) */
+    p.skill-description, .project-info p {
       color: #475569 !important;
       font-weight: 500 !important;
-      line-height: 1.7 !important;
+      line-height: 1.6 !important;
     }
 
-    /* Tags inside Cards */
+    /* Stats Bar overrides */
+    .stat-number { color: #0f172a !important; }
+    .stat-suffix { color: #3b82f6 !important; }
+    .stat-label { color: #475569 !important; }
+
+    /* Tags inside White Cards */
     .skill-tags span, .project-tech span {
       background-color: #f8fafc !important;
       border: 1px solid #cbd5e1 !important;
@@ -64,7 +76,7 @@
       font-size: 0.85rem !important;
     }
 
-    /* Ensure logos fit cleanly without weird shadows */
+    /* Logo Image Sizing */
     .skill-tags span img {
       width: 16px;
       height: 16px;
@@ -78,12 +90,18 @@
       background-color: #e2e8f0 !important;
     }
 
-    /* Fix Contact Card Icons specifically for white background */
-    .contact-card .contact-icon-wrapper {
-      background: rgba(37, 99, 235, 0.1) !important;
+    /* =========================================
+       GRAY CARDS (Contact, Demos)
+       ========================================= */
+    .contact-card, .demo-card {
+      background: rgba(255, 255, 255, 0.03) !important;
+      border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    }
+    .contact-card h3, .contact-card p, .demo-result, .demo-status {
+      color: #e2e8f0 !important;
     }
 
-    /* Force hero title onto a single line always */
+    /* Force hero title onto a single line */
     .hero-title-wrapper {
       display: flex !important;
       flex-direction: row !important;
@@ -229,22 +247,22 @@
       <div class="container">
         <div class="stats-grid">
           <div class="stat-item">
-            <span class="stat-number" data-target="15">0</span><span class="stat-suffix">+</span>
+            <span class="stat-number" data-target="15">15</span><span class="stat-suffix">+</span>
             <span class="stat-label">Projects Completed</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat-item">
-            <span class="stat-number" data-target="5">0</span><span class="stat-suffix">+</span>
+            <span class="stat-number" data-target="5">5</span><span class="stat-suffix">+</span>
             <span class="stat-label">AI Models Deployed</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat-item">
-            <span class="stat-number" data-target="10">0</span><span class="stat-suffix">+</span>
+            <span class="stat-number" data-target="10">10</span><span class="stat-suffix">+</span>
             <span class="stat-label">Dashboards Built</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat-item">
-            <span class="stat-number" data-target="3">0</span><span class="stat-suffix">+</span>
+            <span class="stat-number" data-target="3">3</span><span class="stat-suffix">+</span>
             <span class="stat-label">Years Experience</span>
           </div>
         </div>
@@ -273,7 +291,7 @@
             </div>
           </div>
 
-          <div class="demo-card demo-card-caption" style="background:#fff; border: 1px solid #e2e8f0;">
+          <div class="demo-card demo-card-caption">
             <div class="demo-card-inner">
               <input type="file" id="captionImageInput" accept="image/*" class="demo-file-input">
               <img id="captionImagePreview" alt="Preview" class="demo-preview" style="display:none;">
@@ -283,8 +301,8 @@
                 <span>Generate Caption</span>
                 <i class="fas fa-magic"></i>
               </button>
-              <p id="captionStatus" class="demo-status" style="color:#0f172a;"></p>
-              <p id="captionResult" class="demo-result" style="color:#0f172a;"></p>
+              <p id="captionStatus" class="demo-status"></p>
+              <p id="captionResult" class="demo-result"></p>
             </div>
           </div>
         </div>
@@ -450,7 +468,7 @@
                 </div>
               </div>
 
-              <div class="dm-stats-row" style="background: #fff;">
+              <div class="dm-stats-row" style="background: #fff; border-color: #e2e8f0;">
                 <div class="dm-stat-item"><i class="fas fa-layer-group"></i><span class="dm-stat-val" style="color: #0f172a;">600</span><span class="dm-stat-lbl">Token Chunk Size</span></div>
                 <div class="dm-stat-item"><i class="fas fa-search"></i><span class="dm-stat-val" style="color: #0f172a;">MMR</span><span class="dm-stat-lbl">Search Strategy</span></div>
                 <div class="dm-stat-item"><i class="fas fa-vector-square"></i><span class="dm-stat-val" style="color: #0f172a;">384</span><span class="dm-stat-lbl">Embedding Dims</span></div>
@@ -906,7 +924,7 @@
             </div>
             <p class="skill-description">Interactive dashboards, data modeling, and business intelligence</p>
             <div class="skill-tags">
-              <span><img src="https://cdn.simpleicons.org/powerbi" alt="Power BI"> Power BI</span>
+              <span><img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI"> Power BI</span>
               <span><i class="fas fa-function"></i> DAX</span>
               <span><i class="fas fa-bolt"></i> Power Query</span>
               <span><i class="fas fa-project-diagram"></i> Data Modeling</span>
@@ -939,10 +957,10 @@
             </div>
             <p class="skill-description">Deployment, infrastructure, and automated workflows</p>
             <div class="skill-tags">
-              <span><img src="https://cdn.simpleicons.org/amazonaws" alt="AWS"> AWS</span>
-              <span><img src="https://cdn.simpleicons.org/microsoftazure" alt="Azure"> Azure</span>
-              <span><img src="https://cdn.simpleicons.org/n8n" alt="n8n"> n8n</span>
-              <span><img src="https://cdn.simpleicons.org/powerautomate" alt="Power Automate"> Power Automate</span>
+              <span><img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS"> AWS</span>
+              <span><img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Microsoft_Azure_Logo.svg" alt="Azure"> Azure</span>
+              <span><img src="https://cdn.simpleicons.org/n8n/EA4B71" alt="n8n"> n8n</span>
+              <span><img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Power_Automate_icon.svg" alt="Power Automate"> Power Automate</span>
               <span><i class="fas fa-network-wired"></i> APIs & Webhooks</span>
             </div>
             <div class="skill-level"><div class="skill-level-bar" data-width="86"></div></div>
