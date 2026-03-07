@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="style.css">
   
   <style>
-    /* Inline styles for the new demo instructions box to keep it clean */
+    /* Demo instructions box styles */
     .demo-instructions-box {
       background: rgba(0, 0, 0, 0.03);
       border: 1px solid rgba(0, 0, 0, 0.05);
@@ -42,6 +42,18 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.8rem;
       line-height: 1.6;
+    }
+
+    /* Skills Logo Fixes */
+    .skill-tags span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .skill-tags span img {
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
     }
   </style>
 </head>
@@ -95,7 +107,7 @@
             <span class="badge-dot" aria-hidden="true"></span>
             Available for opportunities
           </div>
-          <h1 class="hero-name">
+          <h1 class="hero-name" style="font-size: clamp(2rem, 4vw, 3.2rem);">
           I turn data into <span class="gradient-text"> clear insights and scalable AI.</span>
           </h1>
           <p class="hero-byline">Rayan Farahani | Data Analyst & AI Engineer</p>
@@ -107,7 +119,7 @@
           </div>
 
           <p class="hero-description">
-            I build data solutions from start to finish. That covers everything from interactive Power BI dashboards that highlight business trends to machine learning models that actually work in the real world. Here is the thing: I care about clean code and measurable outcomes. What this really means is I take messy datasets and turn them into clear strategies you can act on.
+            I build data solutions from start to finish. My work covers everything from interactive Power BI dashboards that highlight business trends to machine learning models that solve real world problems. I focus heavily on clean code and measurable outcomes. Ultimately, I take messy datasets and turn them into clear strategies you can act on.
           </p>
 
           <div class="hero-buttons">
@@ -356,7 +368,7 @@
                       <div class="dm-msg-avatar"><i class="fas fa-brain"></i></div>
                       <div class="dm-msg-content">
                         <div class="dm-msg-bubble">
-                          👋 Hi! I'm <strong>DocMind AI</strong>, a RAG powered assistant built by Rayan.<br><br>
+                          👋 Hi! I am <strong>DocMind AI</strong>, a RAG powered assistant built by Rayan.<br><br>
                           Upload up to <strong>5 files</strong> (PDF, TXT, DOCX, CSV, XLSX, images) on the left, then ask me anything.
                           I will retrieve the most relevant sections and give you accurate, grounded answers.
                         </div>
@@ -742,7 +754,7 @@
                 I extract insights from complex datasets, build interactive dashboards, write optimized SQL queries, and deploy machine learning models that solve actual business problems.
               </p>
               <p>
-                I work with teams to translate data into business strategies that drive measurable results. My approach is simple: combine analytical rigor with creative problem solving.
+                I work with teams to translate data into business strategies that drive measurable results. My approach is simple: I combine analytical rigor with creative problem solving.
               </p>
             </div>
             <div class="about-details">
@@ -876,6 +888,7 @@
           </div>
 
         </div>
+      </div>
     </section>
   </main>
 
@@ -893,7 +906,7 @@
 
     var API_BASE = null;
 
-    var documents     = []; // [{name, file_type, chunks}]
+    var documents     = []; 
     var totalChunks   = 0;
     var isThinking    = false;
     var isUploading   = false;
