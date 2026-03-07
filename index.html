@@ -44,7 +44,7 @@
     .skill-card, .project-card, .stats-bar {
       background-color: #ffffff !important;
       border: 1px solid #e2e8f0 !important;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
     }
 
     /* Bright Card Titles (Dark Text) */
@@ -62,7 +62,7 @@
     /* Stats Bar overrides */
     .stat-number { color: #0f172a !important; }
     .stat-suffix { color: #3b82f6 !important; }
-    .stat-label { color: #475569 !important; }
+    .stat-label { color: #475569 !important; font-weight: 600 !important; }
 
     /* Tags inside White Cards */
     .skill-tags span, .project-tech span {
@@ -74,6 +74,14 @@
       gap: 8px !important;
       padding: 6px 14px !important;
       font-size: 0.85rem !important;
+      line-height: 1 !important;
+    }
+
+    /* Tag Spacing Fix (Fixes CTEs touching pgvector) */
+    .skill-tags, .project-tech {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      gap: 14px 10px !important; 
     }
 
     /* Logo Image Sizing */
@@ -91,16 +99,24 @@
     }
 
     /* =========================================
-       GRAY CARDS (Contact, Demos)
+       GRAY CARDS (Contact, Demos, About Details)
        ========================================= */
-    .contact-card, .demo-card {
-      background: rgba(255, 255, 255, 0.03) !important;
-      border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    .contact-card, .demo-card, .detail-card, .demo-instructions-box, .finger-drawer-wrap, .finger-drawer-instructions {
+      background: #1e293b !important;
+      border: 1px solid #334155 !important;
     }
-    .contact-card h3, .contact-card p, .demo-result, .demo-status {
-      color: #e2e8f0 !important;
+    
+    .contact-card h3, .contact-card p, .demo-result, .demo-status, .detail-value {
+      color: #f1f5f9 !important;
+    }
+    
+    .detail-label {
+      color: #94a3b8 !important;
     }
 
+    /* =========================================
+       LAYOUT OVERRIDES
+       ========================================= */
     /* Force hero title onto a single line */
     .hero-title-wrapper {
       display: flex !important;
@@ -120,20 +136,28 @@
       }
     }
 
-    /* Demo instructions box */
-    .demo-instructions-box {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 1rem;
-      border-radius: 8px;
-      margin-bottom: 1.5rem;
-      font-size: 0.9rem;
+    /* Left Align Demo Sections */
+    #image-captioning, #finger-drawer, #docmind-demo {
+      display: block !important;
+      text-align: left !important;
     }
+    .demo-block-title {
+      display: flex !important;
+      justify-content: flex-start !important;
+      align-items: center !important;
+    }
+    .demo-block-desc {
+      margin-left: 0 !important;
+      text-align: left !important;
+      max-width: 800px !important;
+    }
+
+    /* Demo Scroll Box */
     .demo-category-scroll {
       max-height: 70px;
       overflow-y: auto;
       padding-right: 10px;
-      color: inherit;
+      color: #cbd5e1;
       opacity: 0.8;
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.8rem;
@@ -247,22 +271,22 @@
       <div class="container">
         <div class="stats-grid">
           <div class="stat-item">
-            <span class="stat-number" data-target="15">15</span><span class="stat-suffix">+</span>
+            <span class="stat-number">15</span><span class="stat-suffix">+</span>
             <span class="stat-label">Projects Completed</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat-item">
-            <span class="stat-number" data-target="5">5</span><span class="stat-suffix">+</span>
+            <span class="stat-number">5</span><span class="stat-suffix">+</span>
             <span class="stat-label">AI Models Deployed</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat-item">
-            <span class="stat-number" data-target="10">10</span><span class="stat-suffix">+</span>
+            <span class="stat-number">10</span><span class="stat-suffix">+</span>
             <span class="stat-label">Dashboards Built</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat-item">
-            <span class="stat-number" data-target="3">3</span><span class="stat-suffix">+</span>
+            <span class="stat-number">3</span><span class="stat-suffix">+</span>
             <span class="stat-label">Years Experience</span>
           </div>
         </div>
@@ -274,7 +298,7 @@
         <div class="section-header">
           <span class="section-tag"><i class="fas fa-rocket"></i> Try it live</span>
           <h2 class="section-title">Try My AI</h2>
-          <p class="section-subtitle">
+          <p class="section-subtitle" style="margin-left: auto; margin-right: auto; text-align: center;">
             Image captioning, hand-tracking drawing, and document Q&A. Built and deployed with no sign-up required.
           </p>
         </div>
@@ -296,7 +320,7 @@
               <input type="file" id="captionImageInput" accept="image/*" class="demo-file-input">
               <img id="captionImagePreview" alt="Preview" class="demo-preview" style="display:none;">
             </div>
-            <div class="demo-card-actions">
+            <div class="demo-card-actions" style="border-left: 1px solid #334155;">
               <button class="btn btn-primary" id="captionSubmitBtn">
                 <span>Generate Caption</span>
                 <i class="fas fa-magic"></i>
@@ -310,7 +334,7 @@
         <div class="demo-block" id="finger-drawer">
           <h3 class="demo-block-title"><i class="fas fa-hand-paper"></i> Finger Drawer</h3>
           <p class="demo-block-desc">
-            Draw in the air with your index finger using hand tracking. Ported from my <a href="https://github.com/RayanFarahani/Finger-drawer" target="_blank" rel="noopener noreferrer">Finger-drawer</a> project and running directly in your browser.
+            Draw in the air with your index finger using hand tracking. Ported from my <a href="https://github.com/RayanFarahani/Finger-drawer" target="_blank" rel="noopener noreferrer" style="color: #3b82f6;">Finger-drawer</a> project and running directly in your browser.
           </p>
 
           <div class="finger-drawer-instructions" id="fdInstructions">
@@ -353,129 +377,110 @@
         </div>
 
         <div class="demo-block demo-block-docmind" id="docmind-demo">
-          <div class="docmind-section" aria-label="DocMind AI demo">
-            <div class="dm-bg">
-              <div class="dm-orb dm-orb-1"></div>
-              <div class="dm-orb dm-orb-2"></div>
-              <div class="dm-orb dm-orb-3"></div>
-              <div class="dm-grid"></div>
-            </div>
+          <h3 class="demo-block-title"><i class="fas fa-brain"></i> DocMind AI</h3>
+          <p class="demo-block-desc">
+            Upload up to 5 files (PDF, TXT, DOCX, CSV, XLSX, images) and chat with your documents. Powered by RAG, ChromaDB, and Mistral-7B, running live on Hugging Face.
+          </p>
 
-            <div class="container" style="position:relative;z-index:1;">
-              <div class="section-header reveal">
-                <span class="section-tag light"><i class="fas fa-brain"></i> Live AI Demo</span>
-                <h2 class="section-title light">DocMind AI</h2>
-                <p class="section-subtitle">
-                  Upload up to 5 files (PDF, TXT, DOCX, CSV, XLSX, images) and chat with your documents. Powered by RAG, ChromaDB, and Mistral-7B, running live on Hugging Face.
-                </p>
-              </div>
+          <div class="docmind-section" aria-label="DocMind AI demo" style="padding: 0; background: transparent; box-shadow: none;">
+            <div class="dm-card" style="margin-top: 32px;">
+              <div class="dm-panel dm-left">
+                <div class="dm-status" id="dmStatus">
+                  <span class="dm-status-dot idle"></span>
+                  <span class="dm-status-text">No document loaded</span>
+                </div>
 
-              <div class="dm-card">
-                <div class="dm-panel dm-left">
-                  <div class="dm-status" id="dmStatus">
-                    <span class="dm-status-dot idle"></span>
-                    <span class="dm-status-text">No document loaded</span>
-                  </div>
-
-                  <div class="dm-doc-list" id="dmDocList" style="display:none;">
-                    <div class="dm-doc-list-header">
-                      <div class="dm-doc-count-wrap">
-                        <span class="dm-doc-count-badge" id="dmDocCount">0 / 5</span>
-                        <span class="dm-doc-count-label">documents loaded</span>
-                      </div>
-                      <button class="dm-clear-all-btn" id="dmClearAll" title="Remove all documents">
-                        <i class="fas fa-trash-alt"></i> Clear All
-                      </button>
+                <div class="dm-doc-list" id="dmDocList" style="display:none;">
+                  <div class="dm-doc-list-header">
+                    <div class="dm-doc-count-wrap">
+                      <span class="dm-doc-count-badge" id="dmDocCount">0 / 5</span>
+                      <span class="dm-doc-count-label">documents loaded</span>
                     </div>
-                    <div class="dm-doc-items" id="dmDocItems"></div>
-                    <div class="dm-doc-total" id="dmDocTotal"></div>
-                  </div>
-
-                  <div class="dm-upload-zone" id="dmUploadZone">
-                    <input type="file" id="dmFileInput" accept=".pdf,.txt,.doc,.docx,.csv,.xlsx,.xls,.jpg,.jpeg,.png,.webp" multiple hidden>
-                    <div class="dm-upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
-                    <p class="dm-upload-title" id="dmUploadTitle">Drop your files here</p>
-                    <p class="dm-upload-sub" id="dmUploadSub">Up to 5 files &middot; PDF, TXT, DOCX, CSV, XLSX, JPG/PNG/WEBP</p>
-                    <button class="dm-upload-btn">
-                      <i class="fas fa-folder-open"></i> Browse Files
+                    <button class="dm-clear-all-btn" id="dmClearAll" title="Remove all documents">
+                      <i class="fas fa-trash-alt"></i> Clear All
                     </button>
                   </div>
-
-                  <div class="dm-max-reached" id="dmMaxReached" style="display:none;">
-                    <i class="fas fa-exclamation-circle"></i>
-                    Maximum 5 files reached. Remove a file to upload more.
-                  </div>
-
-                  <div class="dm-or"><span>or try a sample question</span></div>
-
-                  <div class="dm-samples">
-                    <button class="dm-sample-btn" data-q="What are the main topics covered in these documents?"><i class="fas fa-list"></i> Main topics</button>
-                    <button class="dm-sample-btn" data-q="Summarize the key findings or conclusions."><i class="fas fa-compress-alt"></i> Summarize</button>
-                    <button class="dm-sample-btn" data-q="What recommendations are made?"><i class="fas fa-lightbulb"></i> Recommendations</button>
-                    <button class="dm-sample-btn" data-q="What data or evidence is presented?"><i class="fas fa-chart-bar"></i> Evidence</button>
-                  </div>
-
-                  <div class="dm-tech">
-                    <span class="dm-tech-label">Powered by</span>
-                    <div class="dm-tech-pills">
-                      <span>LangChain</span>
-                      <span>ChromaDB</span>
-                      <span>Mistral-7B</span>
-                      <span>FastAPI</span>
-                      <span>HuggingFace</span>
-                    </div>
-                  </div>
-
-                  <a href="https://huggingface.co/spaces/Ryanfafa/docmind-ai" target="_blank" rel="noopener noreferrer" class="dm-external-link">
-                    <i class="fas fa-external-link-alt"></i>
-                    Open full app on HuggingFace
-                  </a>
+                  <div class="dm-doc-items" id="dmDocItems"></div>
+                  <div class="dm-doc-total" id="dmDocTotal"></div>
                 </div>
 
-                <div class="dm-panel dm-right">
-                  <div class="dm-chat-header">
-                    <div class="dm-chat-avatar"><i class="fas fa-brain"></i></div>
-                    <div>
-                      <div class="dm-chat-name">DocMind AI</div>
-                      <div class="dm-chat-sub" id="dmChatSub">Ready to analyze your documents</div>
-                    </div>
-                    <div class="dm-thinking" id="dmThinking"><span></span><span></span><span></span></div>
-                  </div>
+                <div class="dm-upload-zone" id="dmUploadZone">
+                  <input type="file" id="dmFileInput" accept=".pdf,.txt,.doc,.docx,.csv,.xlsx,.xls,.jpg,.jpeg,.png,.webp" multiple hidden>
+                  <div class="dm-upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                  <p class="dm-upload-title" id="dmUploadTitle">Drop your files here</p>
+                  <p class="dm-upload-sub" id="dmUploadSub">Up to 5 files &middot; PDF, TXT, DOCX, CSV, XLSX, JPG/PNG/WEBP</p>
+                  <button class="dm-upload-btn">
+                    <i class="fas fa-folder-open"></i> Browse Files
+                  </button>
+                </div>
 
-                  <div class="dm-messages" id="dmMessages">
-                    <div class="dm-msg dm-msg-ai">
-                      <div class="dm-msg-avatar"><i class="fas fa-brain"></i></div>
-                      <div class="dm-msg-content">
-                        <div class="dm-msg-bubble">
-                          👋 Hi! I am <strong>DocMind AI</strong>, a RAG powered assistant built by Rayan.<br><br>
-                          Upload up to <strong>5 files</strong> (PDF, TXT, DOCX, CSV, XLSX, images) on the left, then ask me anything.
-                          I will retrieve the most relevant sections and give you accurate, grounded answers.
-                        </div>
-                        <div class="dm-msg-meta">DocMind AI &middot; Just now</div>
-                      </div>
-                    </div>
-                  </div>
+                <div class="dm-max-reached" id="dmMaxReached" style="display:none;">
+                  <i class="fas fa-exclamation-circle"></i>
+                  Maximum 5 files reached. Remove a file to upload more.
+                </div>
 
-                  <div class="dm-input-area">
-                    <div class="dm-input-wrap">
-                      <textarea id="dmInput" class="dm-input" placeholder="Upload documents first, then ask anything..." rows="1" disabled></textarea>
-                      <button class="dm-send-btn" id="dmSendBtn" disabled><i class="fas fa-paper-plane"></i></button>
-                    </div>
-                    <div class="dm-input-hint">
-                      <i class="fas fa-shield-alt"></i> Answers are grounded in your documents only to prevent hallucinations.
-                    </div>
+                <div class="dm-or"><span>or try a sample question</span></div>
+
+                <div class="dm-samples">
+                  <button class="dm-sample-btn" data-q="What are the main topics covered in these documents?"><i class="fas fa-list"></i> Main topics</button>
+                  <button class="dm-sample-btn" data-q="Summarize the key findings or conclusions."><i class="fas fa-compress-alt"></i> Summarize</button>
+                  <button class="dm-sample-btn" data-q="What recommendations are made?"><i class="fas fa-lightbulb"></i> Recommendations</button>
+                  <button class="dm-sample-btn" data-q="What data or evidence is presented?"><i class="fas fa-chart-bar"></i> Evidence</button>
+                </div>
+
+                <div class="dm-tech">
+                  <span class="dm-tech-label">Powered by</span>
+                  <div class="dm-tech-pills">
+                    <span>LangChain</span>
+                    <span>ChromaDB</span>
+                    <span>Mistral-7B</span>
+                    <span>FastAPI</span>
+                    <span>HuggingFace</span>
                   </div>
                 </div>
+
+                <a href="https://huggingface.co/spaces/Ryanfafa/docmind-ai" target="_blank" rel="noopener noreferrer" class="dm-external-link">
+                  <i class="fas fa-external-link-alt"></i>
+                  Open full app on HuggingFace
+                </a>
               </div>
 
-              <div class="dm-stats-row" style="background: #fff; border-color: #e2e8f0;">
-                <div class="dm-stat-item"><i class="fas fa-layer-group"></i><span class="dm-stat-val" style="color: #0f172a;">600</span><span class="dm-stat-lbl">Token Chunk Size</span></div>
-                <div class="dm-stat-item"><i class="fas fa-search"></i><span class="dm-stat-val" style="color: #0f172a;">MMR</span><span class="dm-stat-lbl">Search Strategy</span></div>
-                <div class="dm-stat-item"><i class="fas fa-vector-square"></i><span class="dm-stat-val" style="color: #0f172a;">384</span><span class="dm-stat-lbl">Embedding Dims</span></div>
-                <div class="dm-stat-item"><i class="fas fa-bolt"></i><span class="dm-stat-val" style="color: #0f172a;">Top-3</span><span class="dm-stat-lbl">Retrieval K</span></div>
-                <div class="dm-stat-item"><i class="fas fa-robot"></i><span class="dm-stat-val" style="color: #0f172a;">Mistral-7B</span><span class="dm-stat-lbl">LLM Backend</span></div>
+              <div class="dm-panel dm-right">
+                <div class="dm-chat-header">
+                  <div class="dm-chat-avatar"><i class="fas fa-brain"></i></div>
+                  <div>
+                    <div class="dm-chat-name">DocMind AI</div>
+                    <div class="dm-chat-sub" id="dmChatSub">Ready to analyze your documents</div>
+                  </div>
+                  <div class="dm-thinking" id="dmThinking"><span></span><span></span><span></span></div>
+                </div>
+
+                <div class="dm-messages" id="dmMessages">
+                  <div class="dm-msg dm-msg-ai">
+                    <div class="dm-msg-avatar"><i class="fas fa-brain"></i></div>
+                    <div class="dm-msg-content">
+                      <div class="dm-msg-bubble">
+                        👋 Hi! I am <strong>DocMind AI</strong>, a RAG powered assistant built by Rayan.<br><br>
+                        Upload up to <strong>5 files</strong> (PDF, TXT, DOCX, CSV, XLSX, images) on the left, then ask me anything.
+                        I will retrieve the most relevant sections and give you accurate, grounded answers.
+                      </div>
+                      <div class="dm-msg-meta">DocMind AI &middot; Just now</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="dm-input-area">
+                  <div class="dm-input-wrap">
+                    <textarea id="dmInput" class="dm-input" placeholder="Upload documents first, then ask anything..." rows="1" disabled></textarea>
+                    <button class="dm-send-btn" id="dmSendBtn" disabled><i class="fas fa-paper-plane"></i></button>
+                  </div>
+                  <div class="dm-input-hint">
+                    <i class="fas fa-shield-alt"></i> Answers are grounded in your documents only to prevent hallucinations.
+                  </div>
+                </div>
               </div>
             </div>
+
           </div>
         </div>
 
@@ -604,7 +609,7 @@
               <span class="project-badge python-badge">Python</span>
             </div>
             <div class="project-info">
-              <h3>Bank Marketing Analysis: Logistic Regression</h3>
+              <h3>Bank Marketing Analysis</h3>
               <p>
                 Cleaned and prepared a bank marketing dataset, applied feature encoding, then trained and evaluated a Logistic Regression model. Reported results using a confusion matrix and achieved solid test accuracy.
               </p>
@@ -636,7 +641,7 @@
               <span class="project-badge ai-badge">AI / ML</span>
             </div>
             <div class="project-info">
-              <h3>Sea Turtle Image Segmentation: U-Net vs U-Net + CBAM</h3>
+              <h3>Sea Turtle Image Segmentation</h3>
               <p>
                 Designed and evaluated deep learning segmentation models for sea turtle detection. Compared baseline U-Net with attention enhanced U-Net + CBAM to measure performance improvements in pixel level classification.
               </p>
@@ -671,7 +676,7 @@
               <span class="project-badge ai-badge">AI / ML</span>
             </div>
             <div class="project-info">
-              <h3>DocMind AI: Multi-Document RAG Assistant</h3>
+              <h3>DocMind AI: Multi-Document RAG</h3>
               <p>
                 Production ready RAG system that lets users upload multiple documents and ask grounded questions. It uses semantic search with MMR retrieval and a local Mistral 7B backend for accurate answers.
               </p>
@@ -909,10 +914,10 @@
             <p class="skill-description">Relational architecture, vector storage, and data pipelines</p>
             <div class="skill-tags">
               <span><img src="https://cdn.simpleicons.org/postgresql" alt="PostgreSQL"> PostgreSQL</span>
-              <span><i class="fas fa-vector-square"></i> pgvector</span>
+              <span><i class="fas fa-vector-square" style="color: #475569;"></i> pgvector</span>
               <span><img src="https://cdn.simpleicons.org/mysql" alt="MySQL"> MySQL</span>
               <span><i class="fas fa-database" style="color: #FF4F4B;"></i> ChromaDB</span>
-              <span><i class="fas fa-table"></i> CTEs & Window Functions</span>
+              <span><i class="fas fa-table" style="color: #475569;"></i> CTEs & Window Functions</span>
             </div>
             <div class="skill-level"><div class="skill-level-bar" data-width="88"></div></div>
           </div>
@@ -924,11 +929,11 @@
             </div>
             <p class="skill-description">Interactive dashboards, data modeling, and business intelligence</p>
             <div class="skill-tags">
-              <span><img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI"> Power BI</span>
-              <span><i class="fas fa-function"></i> DAX</span>
-              <span><i class="fas fa-bolt"></i> Power Query</span>
-              <span><i class="fas fa-project-diagram"></i> Data Modeling</span>
-              <span><i class="fas fa-chart-pie"></i> Dashboards</span>
+              <span><i class="fas fa-chart-bar" style="color: #F2C811; font-size: 16px;"></i> Power BI</span>
+              <span><i class="fas fa-calculator" style="color: #475569;"></i> DAX</span>
+              <span><i class="fas fa-bolt" style="color: #475569;"></i> Power Query</span>
+              <span><i class="fas fa-project-diagram" style="color: #475569;"></i> Data Modeling</span>
+              <span><i class="fas fa-chart-pie" style="color: #475569;"></i> Dashboards</span>
             </div>
             <div class="skill-level"><div class="skill-level-bar" data-width="85"></div></div>
           </div>
@@ -942,10 +947,10 @@
             <div class="skill-tags">
               <span><img src="https://cdn.simpleicons.org/pytorch" alt="PyTorch"> PyTorch</span>
               <span><img src="https://cdn.simpleicons.org/tensorflow" alt="TensorFlow"> TensorFlow</span>
-              <span><i class="fas fa-brain"></i> RAG & LLMs</span>
+              <span><i class="fas fa-brain" style="color: #475569;"></i> RAG & LLMs</span>
               <span><img src="https://cdn.simpleicons.org/langchain" alt="LangChain"> LangChain</span>
               <span><img src="https://cdn.simpleicons.org/huggingface" alt="HuggingFace"> HuggingFace</span>
-              <span><i class="fas fa-eye"></i> Computer Vision</span>
+              <span><i class="fas fa-eye" style="color: #475569;"></i> Computer Vision</span>
             </div>
             <div class="skill-level"><div class="skill-level-bar" data-width="90"></div></div>
           </div>
@@ -957,11 +962,11 @@
             </div>
             <p class="skill-description">Deployment, infrastructure, and automated workflows</p>
             <div class="skill-tags">
-              <span><img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS"> AWS</span>
-              <span><img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Microsoft_Azure_Logo.svg" alt="Azure"> Azure</span>
-              <span><img src="https://cdn.simpleicons.org/n8n/EA4B71" alt="n8n"> n8n</span>
-              <span><img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Power_Automate_icon.svg" alt="Power Automate"> Power Automate</span>
-              <span><i class="fas fa-network-wired"></i> APIs & Webhooks</span>
+              <span><i class="fab fa-aws" style="color: #FF9900; font-size: 16px;"></i> AWS</span>
+              <span><i class="fab fa-microsoft" style="color: #0089D6; font-size: 16px;"></i> Azure</span>
+              <span><i class="fas fa-project-diagram" style="color: #EA4B71; font-size: 16px;"></i> n8n</span>
+              <span><i class="fas fa-bolt" style="color: #0066FF; font-size: 16px;"></i> Power Automate</span>
+              <span><i class="fas fa-network-wired" style="color: #475569;"></i> APIs & Webhooks</span>
             </div>
             <div class="skill-level"><div class="skill-level-bar" data-width="86"></div></div>
           </div>
