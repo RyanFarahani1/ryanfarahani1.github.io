@@ -225,15 +225,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const html = document.documentElement;
 
     // Check saved preference
-    const savedTheme = localStorage.getItem('theme') || 'light';
+    const savedTheme = localStorage.getItem('theme') || html.getAttribute('data-theme') || 'dark';
     html.setAttribute('data-theme', savedTheme);
 
-    themeToggle.addEventListener('click', () => {
-        const current = html.getAttribute('data-theme');
-        const next = current === 'light' ? 'dark' : 'light';
-        html.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
-    });
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        });
+    }
 
     // ==================== SCROLL PROGRESS BAR ====================
     const scrollProgress = document.getElementById('scrollProgress');
@@ -266,7 +268,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function animateCounters() {
         statNumbers.forEach(stat => {
-            const target = parseInt(stat.getAttribute('data-target'));
+            const existing = parseInt((stat.textContent || '').replace(/[^\d]/g, ''), 10);
+            const targetAttr = parseInt(stat.getAttribute('data-target'), 10);
+            const target = Number.isFinite(targetAttr) ? targetAttr : (Number.isFinite(existing) ? existing : 0);
             const duration = 2000;
             const step = target / (duration / 16);
             let current = 0;

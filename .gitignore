@@ -1,0 +1,23 @@
+### macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+### Editor / IDE
+.vscode/
+.idea/
+
+### Node / frontend (in case you add tooling later)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+
+### Build outputs (if you introduce bundlers later)
+dist/
+build/
+.parcel-cache/
+.vite/
+
