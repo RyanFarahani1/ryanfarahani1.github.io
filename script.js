@@ -114,11 +114,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==================== TYPING EFFECT ====================
     const typedElement = document.getElementById('typedText');
     const titles = [
-        'Data Analyst.',
-        'AI Engineer.',
-        'Python Developer.',
-        'Dashboard Builder.',
-        'Problem Solver.'
+        'Digital Transformation.',
+        'Data Analysis.',
+        'Workflow Automation.',
+        'Power Platform.',
+        'AI Systems.'
     ];
     let titleIndex = 0;
     let charIndex = 0;

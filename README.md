@@ -1,12 +1,13 @@
 # ryanfarahani1.github.io
 
-Personal portfolio website for **Rayan Farahani** (Data Analyst & AI Engineer).  
-Live site: `https://ryanfarahani1.github.io/`
+Personal portfolio website for **Rayan Farahani** (Business Analyst · Power Platform & AI automation).  
+Live site: `https://rayanfarahani.com/` (GitHub Pages: `https://ryanfarahani1.github.io/`)
 
 ## Highlights
 
 - **Fast, single-page** portfolio (HTML/CSS/JS) deployed via GitHub Pages
 - **Interactive demos section** linking to deployed AI projects (Hugging Face Spaces)
+- **Automation + analytics positioning** aligned with Rayan’s LinkedIn (Power BI, Power Automate, n8n, Python/SQL, applied AI)
 - **Responsive UI** with accessibility basics (skip link, ARIA labels)
 
 ## Tech stack
